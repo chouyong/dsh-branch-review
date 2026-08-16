@@ -2,23 +2,50 @@
   "name": "dsh-branch-review",
   "version": "0.1.0",
   "description": "Track human decisions for related DeepSeek Harness conversation branches.",
-  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "cordis", "conversation", "fork", "review"],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "conversation",
+    "fork",
+    "review"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "exports": {
-    ".": { "types": "./lib/types/index.d.ts", "default": "./lib/index.js" },
-    "./client": { "types": "./lib/types/client/index.d.ts", "default": "./lib/client.js" },
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
     "./package.json": "./package.json"
   },
   "dsh": {
-    "bundle": { "patch": "./cordis.patch.yml" },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
-      "inject": ["@deepseek-ai/dsh-client-runtime", "@deepseek-ai/dsh-client-ui-conversation"]
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
     }
   },
-  "files": ["lib/index.js", "lib/client.js", "lib/client.js.map", "lib/types/**/*.d.ts", "cordis.patch.yml", "assets/*.png"],
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "lib/client.js.map",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "assets/*.png",
+    "assets/*.gif"
+  ],
   "scripts": {
     "build": "npm run build:types && npm run build:bundle",
     "build:types": "tsc -p tsconfig.build.json",
@@ -28,13 +55,21 @@
     "test": "vitest run",
     "test:bundle": "node scripts/check-bundle.mjs",
     "verify:package": "node scripts/check-package-contract.mjs",
+    "verify:browser": "node scripts/verify-real-browser.mjs",
     "verify": "npm run typecheck && npm run build && npm test && npm run test:bundle && npm run verify:package"
   },
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/chouyong/dsh-branch-review.git" },
-  "bugs": { "url": "https://github.com/chouyong/dsh-branch-review/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chouyong/dsh-branch-review.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chouyong/dsh-branch-review/issues"
+  },
   "homepage": "https://github.com/chouyong/dsh-branch-review#readme",
-  "engines": { "node": "^22.19.0 || >=24.0.0" },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
   "peerDependencies": {
     "@deepseek-ai/cordis": ">=4.0.1",
     "@deepseek-ai/dsh-client-runtime": ">=0.0.1-rc.1",
@@ -50,7 +85,10 @@
     "@types/node": "^24.13.3",
     "@types/react": "~18.3.1",
     "@types/react-dom": "~18.3.1",
+    "gif-encoder-2": "^1.0.5",
     "jsdom": "^29.1.1",
+    "playwright-core": "^1.54.2",
+    "pngjs": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsdown": "^0.22.2",

@@ -31,6 +31,9 @@
 - DSH manager 的 mutation union 明确处理 `upsert`, `remove`, `status`, `activity`, `engaged`；删除会从 host 列表投影消失，插件记录不能随会话删除而静默丢失，必须降级为 orphaned。
 - 只读竞品事实：`ZhengQingJing/dsh-session-tree`（⭐3）与 `Nirvana-Jie/dsh-session-tree`（⭐1）均早于本项目，使用缩进/ASCII 或 ARIA tree，而非决策队列；因此不得宣称“首个/唯一”会话树或分支评审插件。
 - 发布日可见的近邻没有本插件的“keep/discard/follow-up 决策记录”语义；这只说明当前检索的低可发现性，不证明绝对不存在竞品。
+- DSH 运行事实源记录的真实 home/profile 为 `D:\dsh-home` / `D:\dsh-home\profiles\web`，构建 CLI 为 `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`，版本 `0.1.0-rc.5`；本插件只复用路径事实，不复用其它插件截图或 receipt。
+- 已验证浏览器脚本的高信号门禁包括：根页面与插件 asset HTTP 200、served/local bundle SHA-256 相同、style 节点恰好一个、console/page/request errors 全 0、桌面与 390px 移动布局无横向溢出、真实分支交互后才截图。
+- Stage 1 官方安装首次受限 shell 失败类别为 profile 临时文件创建 `EPERM`；同一命令在受控提升后成功，profile 使用 `link:D:/knowledgeBase/dsh-branch-review`，pnpm 11.7.0 supply-chain lock 检查通过。该环境修正使本次最终分类至少为 `PASS_AFTER_CHANGES`。
 
 ### Stage 0 Answers
 - 可安装 UI slot：`conversation.session.header.actions`；`.utilities` 仅在主干新契约，发布版不能依赖。
@@ -68,4 +71,9 @@
 - `C:\Users\zhouy\.codex\skills\codex-claude-cli-review\SKILL.md`
 
 ## Visual/Browser Findings
-- 尚未开始真实浏览器门禁；不得使用概念图或重绘替代证据。
+- 真实 DSH `0.1.0-rc.5` 在 `http://127.0.0.1:3091` 运行，Edge `151.0.4129.86` 门禁通过；root 与 `dsh-branch-review/client.js` 均 HTTP 200，served/local bundle SHA-256 同为 `6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493`。
+- 公开 UI 通过 `分叉会话` 建立一个 parent 与两个 sibling；插件在标题栏显示 `Branch review`，候选为 1 parent + 2 sibling；新会话基线不显示入口。
+- 三种状态 `keep-left`、`keep-right`、`follow-up` 均真实保存；重载、resolved 筛选、Open session、Export metadata 和 Import metadata 通过；console/page/request failures 均为 0。
+- 桌面截图首次暴露宿主 header overflow 裁切面板左侧文字；将面板改为 viewport-fixed 后重新构建并重跑门禁，最终三图与 3-frame GIF 可读且无横向溢出。
+- 最终证据：`assets/branch-review-desktop.png` SHA-256 `6FFFFDBDAC1D4D45618FA890774EBB9DCCD87BCD1817B423EE26533C067E16B5`；`assets/branch-review-decisions.png` `E6221A75A0D997E87F50B492AB24458CFE53F3D7229D2F331B0AFBD4ED002677`；`assets/branch-review-mobile.png` `EA57B21313C049B4BAC7F8BB29489938F24195D0A73A22846728D1625E6078BD`；`assets/branch-review-flow.gif` `D0A00DD3DBCE76D9B1D6BB7FD4B55CEDD79D9B22DF7CCBAEAA4596A35418C287`。
+- 机器回执为 `docs/browser-gate-receipt.json`；当前 local profile 未配置模型 API key，门禁未发送消息、未读取秘密，截图中的宿主错误不属于浏览器错误。

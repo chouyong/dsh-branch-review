@@ -18,11 +18,17 @@
 
 ## 安装
 
-需要已验证的 DSH Web profile 和 Node.js `^22.19.0 || >=24.0.0`。发布 tarball 完成真实 Stage 1→3 门禁后，使用 DSH 官方插件路径：
+需要已验证的 DSH Web profile 和 Node.js `^22.19.0 || >=24.0.0`。GitHub Release 尚未创建；只有满足 `docs/publication-eligibility.md` 的 24 小时、10 个真实提交和 Claude GO 条件后，才会发布下面的版本化 URL：
 
 ```powershell
 dsh plugin --profile web add https://github.com/chouyong/dsh-branch-review/releases/download/v0.1.0/dsh-branch-review-0.1.0.tgz
 dsh --profile web
+```
+
+本次真实门禁使用官方 CLI 的本地 link 安装（不会把本地路径当成 Release 资产）：
+
+```powershell
+dsh plugin --profile web add D:\knowledgeBase\dsh-branch-review
 ```
 
 开发与本地验证：
@@ -30,9 +36,10 @@ dsh --profile web
 ```powershell
 npm install --ignore-scripts --legacy-peer-deps
 npm run verify
+npm run verify:browser
 ```
 
-`npm run verify` 执行 typecheck、生产构建、纯函数/存储测试、ModuleLoader bundle contract 和 package contract。真实 DSH 安装与浏览器门禁必须按 `docs/release-evidence.md` 逐项执行；未通过前不会把本地 tarball 描述为已验证安装源。
+`npm run verify` 执行 typecheck、生产构建、纯函数/存储测试、ModuleLoader bundle contract 和 package contract。`npm run verify:browser` 需要已启动的隔离 DSH Web 和 Edge，并只读取公开 UI；真实安装与门禁的每项结果按 `docs/release-evidence.md` 记录。
 
 卸载：
 
@@ -76,7 +83,15 @@ dsh plugin --profile web remove dsh-branch-review
 
 ## 真实证据
 
-真实截图、短 GIF、构件 SHA-256、运行 profile 和安装尝试只在 Stage 3 通过后写入 `docs/release-evidence.md` 与 release report。当前开发阶段不放概念图、不重绘截图，也不声称已完成真实浏览器门禁。
+以下文件由真实 DSH Web + Microsoft Edge 门禁生成，不是概念图或重绘：
+
+![Branch review desktop queue](./assets/branch-review-desktop.png)
+
+![Three decision states](./assets/branch-review-decisions.png)
+
+![Branch review mobile queue](./assets/branch-review-mobile.png)
+
+动画证据：[真实交互短 GIF](./assets/branch-review-flow.gif)。构件、截图、GIF、profile、安装尝试和每项检查的哈希见 [`docs/release-evidence.md`](./docs/release-evidence.md) 与 [`docs/browser-gate-receipt.json`](./docs/browser-gate-receipt.json)。本次 profile 没有配置模型 API key；门禁不发送消息、不读取或记录任何密钥，截图中的宿主会话错误属于既有 DSH 会话状态，不是浏览器 console/page/request error。
 
 ## 开发文档
 

@@ -34,20 +34,32 @@
   - `docs/publication-eligibility.md` (created)
 
 ### Phase 2: Project and Domain Core
-- **Status:** in_progress
+- **Status:** complete
 - **Started:** 2026-08-16
 - Actions taken:
-  - 采用版本化 localStorage envelope 与纯函数核心边界，准备创建真实包脚手架。
+  - 建立 `package.json`、tsconfig、tsdown、Vitest 和 Cordis patch，使用已核验 DSH 包契约。
+  - 实现 `ReviewRecord` schema v1、schema v0 迁移、校验、pair 去重、导入/导出纯函数。
+  - 实现真实 parent/child/sibling eligibility、orphaned/degraded health 与队列筛选排序。
+  - 实现 `ReviewStore` localStorage envelope、损坏/容量失败/未知版本/跨标签处理和调用方 lineage validator。
+  - 实现标题栏 slot 的 `DecisionQueue` UI、状态/理由/标签/链接、打开会话、显式导入导出、Escape/焦点恢复和移动布局。
+  - `npm run verify` 通过：typecheck、生产 build、9 个测试、bundle contract、package contract。
+  - 完成 README 与架构文档，明确隐私边界、安装路径、兼容性和未完成的真实截图门禁。
 - Files created/modified:
-  - `findings.md` (updated with Stage 0 evidence)
-  - `docs/release-evidence.md` (Stage 0 closed)
-  - `task_plan.md` (Phase 1 complete, Phase 2 in progress)
+  - `package.json`, `package-lock.json`, `tsconfig*.json`, `tsdown.config.ts`, `vitest.config.ts`, `cordis.patch.yml`
+  - `src/` domain/storage/UI implementation and `tests/` four focused suites
+  - `scripts/check-bundle.mjs`, `scripts/check-package-contract.mjs`
+  - `README.md`, `docs/architecture.md`
+  - `task_plan.md`, `progress.md`
 
 ### Phase 3: Storage, Queue, and UI
-- **Status:** pending
+- **Status:** complete
 
 ### Phase 4: Stage 1 Build and Install
-- **Status:** pending
+- **Status:** in_progress
+- Actions taken:
+  - 已运行 `npm install --ignore-scripts --legacy-peer-deps` 并成功解析 120 个依赖。
+  - 已运行完整 `npm run verify`；DSH prerequisite 与官方插件安装尝试待执行。
+  - 官方 `dsh plugin --profile web add D:\knowledgeBase\dsh-branch-review` 首次受限 shell 失败为 profile `_tmp_*` 创建 `EPERM`；受控提升后同一命令成功，未使用 tarball fallback。
 
 ### Phase 5: Stage 2-3 Real Runtime Gate
 - **Status:** pending
@@ -80,6 +92,17 @@
 | 2026-08-16 | First bundle contract check assumed single-quoted require calls and failed on the built artifact's double quotes | 1 | Kept the artifact unchanged, widened the checker to quote-preserving regexes, and added `lib/` to ignored outputs |
 | 2026-08-16 | First storage hardening patch did not match the exact event-handler context | 1 | No files changed; read the current fragment and applied smaller storage/UI/test patches |
 | 2026-08-16 | Documentation patch was rejected because one README code-block line lacked the patch `+` marker | 1 | No partial write; split documentation into two smaller patches |
+
+### Stage 1→3 Real Gate: 2026-08-16
+- **Status:** `PASS_AFTER_CHANGES` for the local implementation; publication remains `WAITING_ELIGIBILITY`.
+- Added dev-only `playwright-core`, `pngjs`, and `gif-encoder-2`; `npm run verify:browser` is now the repeatable real Edge gate.
+- The first browser run found a real desktop defect: host header overflow clipped the absolute panel. Changed the panel to viewport-fixed positioning, rebuilt, and reran the full gate.
+- Official DSH link install was previously attempted in `D:\dsh-home\profiles\web`: restricted shell failed with profile temp-file `EPERM`; controlled elevation succeeded with `dsh-branch-review` linked into the profile and supply-chain lock verified.
+- Real DSH `0.1.0-rc.5` PID `14080` served `http://127.0.0.1:3091`; public UI created one parent and two sibling forks via `分叉会话`.
+- Final browser receipt (`2026-08-16T12:39:31.142Z`): root/plugin HTTP 200, served/local bundle SHA-256 `6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493`, Edge `151.0.4129.86`, 3 candidates, 3 decision states, reload/filter/navigation/import/export pass, desktop/mobile pass, console/page/request errors 0.
+- Genuine evidence generated: `assets/branch-review-desktop.png`, `assets/branch-review-decisions.png`, `assets/branch-review-mobile.png`, and 3-frame `assets/branch-review-flow.gif`; receipt is `docs/browser-gate-receipt.json`.
+- Tarball `dsh-branch-review-0.1.0.tgz` SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`.
+- Separate remove/restart contribution proof passed: after official CLI removal the restarted profile had no plugin asset, style, or trigger; official link install restored the plugin and final browser gate passed again. Remaining gate: create the next real functional commit, then Claude dry-run and independent review.
 
 ## 5-Question Reboot Check
 | Question | Answer |

@@ -18,44 +18,45 @@ Phase 1
 - **Status:** complete
 
 ### Phase 2: Project and Domain Core
-- [ ] 建立真实包版本、构建脚手架与窄类型契约
-- [ ] 实现版本化 `ReviewRecord` 校验、迁移和降级模型
-- [ ] 实现真实 parent/child/sibling eligibility
-- [ ] 实现筛选、排序、序列化和导入纯函数
-- [ ] 对应最小验证与原子提交
-- **Status:** in_progress
+- [x] 建立真实包版本、构建脚手架与窄类型契约
+- [x] 实现版本化 `ReviewRecord` 校验、迁移和降级模型
+- [x] 实现真实 parent/child/sibling eligibility
+- [x] 实现筛选、排序、序列化和导入纯函数
+- [x] 对应最小验证与原子提交
+- **Status:** complete
 
 ### Phase 3: Storage, Queue, and UI
-- [ ] 实现可迁移、可导出、可卸载的浏览器存储
-- [ ] 处理损坏、重复、未知版本、容量失败和并发更新
-- [ ] 实现队列、状态、理由、标签、链接和会话打开
-- [ ] 实现桌面/移动端、键盘、焦点、Escape 与可读错误
-- [ ] 精确 disposer 覆盖样式、slot、listener 和订阅
-- **Status:** pending
+- [x] 实现可迁移、可导出、可卸载的浏览器存储
+- [x] 处理损坏、重复、未知版本、容量失败和并发更新
+- [x] 实现队列、状态、理由、标签、链接和会话打开
+- [x] 实现桌面/移动端、键盘、焦点、Escape 与可读错误
+- [x] 精确 disposer 覆盖样式、slot、listener 和订阅
+- **Status:** complete
 
 ### Phase 4: Stage 1 Build and Install
-- [ ] 完成 typecheck、生产 build、bundle contract 和全量测试
-- [ ] 核验 ModuleLoader 包装、externals 与无第二份 React
-- [ ] 先尝试文档化安装并保留首次结果分类
-- [ ] 必要时验证可复核 tarball fallback 与构件哈希
+- [x] 完成 typecheck、生产 build、bundle contract 和全量测试
+- [x] 核验 ModuleLoader 包装、externals 与无第二份 React
+- [x] 先尝试文档化安装并保留首次结果分类
+- [x] 验证可复核 tarball 构件与 SHA-256
 - [ ] 每个里程碑形成真实、功能性、可审阅提交
-- **Status:** pending
+- **Status:** in_progress
 
 ### Phase 5: Stage 2-3 Real Runtime Gate
-- [ ] 使用隔离 D 盘 profile 启动真实 DSH
-- [ ] 核验 asset 200、slot/style、零错误和卸载清理
-- [ ] 通过真实 UI 建立一个 parent 与两个 sibling forks
-- [ ] 验证三种决策、筛选、重载、导航、导入导出
-- [ ] 验证桌面与 390px 移动端并保留三张截图和短 GIF
-- **Status:** pending
+- [x] 使用 D 盘 profile 启动真实 DSH
+- [x] 核验 asset 200、slot/style、零错误和布局
+- [x] 通过真实 UI 建立一个 parent 与两个 sibling forks
+- [x] 验证三种决策、筛选、重载、导航、导入导出
+- [x] 验证桌面与 390px 移动端并保留三张截图和短 GIF
+- [x] 完成 remove/restart 后的独立卸载证明
+- **Status:** complete
 
 ### Phase 6: Stage 4 Evidence and Claude Review
-- [ ] 只用已验证事实完成 README、release report 和安装材料
-- [ ] 固化源码、构件、运行态与截图身份
+- [x] 只用已验证事实完成 README、release report 和安装材料
+- [x] 固化源码、构件、运行态与截图身份
 - [ ] 创建 R1 通知并先执行 Claude dry-run
 - [ ] 运行唯一只读 Claude 审核链并校验独立回执
 - [ ] 对 GO 独立复查；对 HOLD 保留 R1 并以新 R2 收口
-- **Status:** pending
+- **Status:** pending (Claude waits until uninstall proof and commit)
 
 ### Phase 7: Publication Eligibility and Handoff
 - [x] 核验 GitHub owner、visibility、远端与真实 `created_at`
@@ -96,6 +97,7 @@ Phase 1
 | 首次 `npm run test:bundle` 只匹配单引号 require，未识别实际双引号产物 | 1 | 产物本身已构建成功；检查器改为带反向引用的单双引号正则，并忽略生成的 `lib/` |
 | 存储补强补丁首次上下文匹配失败，未写入任何文件 | 1 | 读取精确片段后拆成小补丁成功应用；未重复原失败大补丁 |
 | 文档大补丁因 README 代码块漏写 `+` 而被 apply_patch 拒绝 | 1 | 未产生部分写入；拆分为 README 与架构两个小补丁并重新应用 |
+| 官方 DSH 安装首次在受限 shell 创建 profile `_tmp_*` 时返回 `EPERM` | 1 | 保留失败类别；按环境规则对同一官方命令请求受控提升，第二次安装成功 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。

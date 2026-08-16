@@ -36,7 +36,7 @@ schema `0` 只作为显式迁移输入，支持旧字段 `id/left/right/decision
 
 ## UI 生命周期
 
-`apply()` 创建一个 store，注册 stylesheet effect 和 `conversation.session.header.actions` slot contribution。slot 注册、样式 holder、storage subscription、pointer/keydown listeners 和 React effect 均有精确逆操作。无真实相关候选且无现有记录时，组件返回 `null`，不显示无效入口。Escape 关闭面板，微任务恢复 trigger 焦点；面板在 390px 下切换为固定单栏。
+`apply()` 创建一个 store，注册 stylesheet effect 和 `conversation.session.header.actions` slot contribution。slot 注册、样式 holder、storage subscription、pointer/keydown listeners 和 React effect 均有精确逆操作。无真实相关候选且无现有记录时，组件返回 `null`，不显示无效入口。Escape 关闭面板，微任务恢复 trigger 焦点；桌面面板使用 viewport-fixed 定位，避免被宿主 header overflow 裁切，390px 下切换为 inset fixed 单栏。
 
 ## Bundle 与安装
 

@@ -4,7 +4,7 @@
 
 ## Outcome
 
-`FAIL` — Stage 0 尚在进行，任何必需门禁未验证前均失败关闭。最终只允许改为 `FIRST_PASS` 或 `PASS_AFTER_CHANGES`，并必须列出首次尝试后的全部变更。
+`PASS_AFTER_CHANGES` — 首次官方安装在受限 shell 因 profile 临时目录 `EPERM` 失败；受控提升后同一官方 link 安装成功。随后最新构建、真实 DSH Web、Edge 门禁、截图和 GIF 均通过。由于 GitHub 仓库尚未满 24 小时、真实功能提交尚未达到 10 个且 Claude 尚未审核，发布资格仍为 `WAITING_ELIGIBILITY`，禁止创建 PR。
 
 ## Stage 0: Preflight
 
@@ -16,10 +16,10 @@
 - Source commit: `fd010c4` (`chore: establish branch review project contract`)
 - Dirty worktree: 首个提交后需用 scoped Git 复核；`.codegraph/` 是忽略的本地生成索引
 - Remotes: `origin=https://github.com/chouyong/dsh-branch-review.git`
-- Plugin package/version: 待实现
-- Artifact SHA-256: 待 Stage 1 构建
-- DSH source/executable: 待核验
-- Effective DSH home/profile: 待核验；必须位于隔离的 D 盘路径
+- Plugin package/version: `dsh-branch-review@0.1.0`
+- Artifact SHA-256: tarball `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; browser bundle `6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493`
+- DSH source/executable: source `D:\knowledgeBase\deepseek-harness`, built CLI `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`, version `0.1.0-rc.5`
+- Effective DSH home/profile: `D:\dsh-home` / `D:\dsh-home\profiles\web`; profile manifest contains `dsh-branch-review` as a link dependency and the existing read-only `dsh-fork-graph` fixture
 - Relay base URL/model discovery endpoint/web port: 待核验；不得记录秘密值
 
 ### Storage Roots
@@ -54,44 +54,48 @@
 
 ## Stage 1: Build and Install
 
-- Dependency command and flags: 待项目规则和真实包版本核验
-- Typecheck: pending
-- Production build: pending
-- Bundle contract: pending
-- Full tests: pending
-- DSH prerequisite build: pending
-- Documented install attempt: pending；必须先执行并保留首次结果类别
-- Tarball fallback: not authorized by failure evidence yet
-- Artifact identity: pending
+- Dependency command and flags: `npm install --ignore-scripts --legacy-peer-deps`; added dev-only `playwright-core`, `pngjs`, `gif-encoder-2` for the browser gate
+- Typecheck: PASS (`npm run typecheck`)
+- Production build: PASS (`npm run build`); browser bundle 34,438 bytes
+- Bundle contract: PASS (`npm run test:bundle`)
+- Full tests: PASS (`npm test`, 4 files / 9 tests)
+- Package contract: PASS (`npm run verify:package`)
+- DSH prerequisite: running official `0.1.0-rc.5` CLI at `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`; PID `14080`, port `3091`
+- Documented install attempt 1: failed, restricted shell `EPERM` while opening `D:\dsh-home\profiles\web\_tmp_*`; exact CLI category `pnpm failed in profile directory`
+- Documented install attempt 2: passed after controlled elevation; profile dependency is `dsh-branch-review link:D:/knowledgeBase/dsh-branch-review`, pnpm `11.7.0`, supply-chain lock verified
+- Tarball fallback: not used; official link install passed after environment permission correction
+- Artifact identity: `dsh-branch-review-0.1.0.tgz`, 21 files, SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; `lib/client.js` SHA-256 `6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493`
 
 ## Stage 2: Runtime Load
 
-- Isolated D-drive profile/home: pending
-- Plugin client asset HTTP status: pending
-- Style node and slot presence: pending
-- Console errors: pending
-- Page errors: pending
-- Failed requests: pending
-- Disposer/uninstall result: pending
-- No-related-branch trigger count: pending
+- Isolated D-drive profile/home: PASS for `D:\dsh-home\profiles\web`; link dependency and lockfile were re-read after install
+- Plugin client asset HTTP status: PASS, root and asset HTTP 200; served/local SHA-256 both `6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493`
+- Style node and slot presence: PASS, `#dsh-branch-review-style` count 1 and visible `Branch review` slot trigger
+- Console errors: PASS, 0
+- Page errors: PASS, 0
+- Failed requests: PASS, 0
+- Disposer/uninstall result: PASS; after official CLI remove and DSH restart, root remained HTTP 200 with no `dsh-branch-review` asset, style node, or `Branch review` trigger; official link install then restored the plugin and this gate passed again
+- No-related-branch trigger count: PASS, fresh `新会话` has no `Branch review` trigger
 
 ## Stage 3: Real Branch Review
 
-- Parent conversation: pending
-- Sibling fork A/B and shared-parent proof: pending
-- Three distinct decision states: pending
-- Filter/reload/open-session/import/export results: pending
-- Desktop and 390px mobile results: pending
-- Genuine screenshot paths and capture attempt: pending
-- Short GIF path and capture attempt: pending
+- Parent conversation: PASS, real UI title `FORK_DIFF_GATE_PARENT_20260816 请给出`
+- Sibling fork A/B and shared-parent proof: PASS, DSH public `分叉会话` menu created two siblings; queue exposed 1 parent + 2 sibling candidates
+- Three distinct decision states: PASS, `keep-left`, `keep-right`, `follow-up`
+- Filter/reload/open-session/import/export results: PASS, resolved filter retained 2 records; reload persisted all 3; navigation and metadata round-trip passed
+- Desktop and 390px mobile results: PASS, no horizontal overflow; mobile panel bounded to 390x844
+- Genuine screenshot paths and capture attempt: PASS, `assets/branch-review-desktop.png`, `assets/branch-review-decisions.png`, `assets/branch-review-mobile.png`
+- Short GIF path and capture attempt: PASS, `assets/branch-review-flow.gif`, 3 real Edge frames
+- Browser receipt: `docs/browser-gate-receipt.json`, Edge `151.0.4129.86`, DSH `0.1.0-rc.5`, generated `2026-08-16T12:43:50.840Z`
+- Screenshot SHA-256: desktop `6FFFFDBDAC1D4D45618FA890774EBB9DCCD87BCD1817B423EE26533C067E16B5`; decisions `E6221A75A0D997E87F50B492AB24458CFE53F3D7229D2F331B0AFBD4ED002677`; mobile `EA57B21313C049B4BAC7F8BB29489938F24195D0A73A22846728D1625E6078BD`; GIF `D0A00DD3DBCE76D9B1D6BB7FD4B55CEDD79D9B22DF7CCBAEAA4596A35418C287`
 
 ## Stage 4: Publication
 
-- Verified documentation claims: pending
-- Commit history count and identities: pending
+- Verified documentation claims: README now links only to generated local evidence and states that GitHub Release URL is not yet available
+- Commit history count and identities: 3 pushed product commits before this evidence milestone; this milestone must be committed as a real functional/documentation change, not an empty count filler
 - GitHub owner/visibility/created_at/eligible_after: 以唯一台账 `docs/publication-eligibility.md` 为准
 - GitHub API `created_at` and `eligible_after`: see `docs/publication-eligibility.md` (created_at recorded; 24-hour window still open)
-- Claude review: not started; prohibited until implementation and evidence stabilize
+- Claude review: not started; now eligible to begin after this evidence and the next verification commit; must use dry-run then one read-only chain
 - PR status: `WAITING_ELIGIBILITY`; creation is forbidden until all gates pass
 - Persistent goal: active; objective includes local Stage 0→4 closure while preserving all PR eligibility red lines
 
