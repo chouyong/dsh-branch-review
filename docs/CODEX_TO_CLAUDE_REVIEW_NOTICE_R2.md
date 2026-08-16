@@ -1,6 +1,6 @@
 # Codex -> Claude 独立审核通知
 
-状态：READY_FOR_REVIEW  
+状态：READY_FOR_REVIEW
 轮次：R2（R1A HOLD 后的独立修复复核）
 
 ## Review Scope

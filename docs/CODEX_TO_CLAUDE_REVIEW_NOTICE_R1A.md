@@ -1,6 +1,6 @@
 # Codex -> Claude 独立审核通知
 
-状态：READY_FOR_REVIEW  
+状态：READY_FOR_REVIEW
 轮次：R1A（R1 broad scope was `NO_RESULT_TIMEOUT`; this is a new narrow chain）
 
 ## Review Scope
