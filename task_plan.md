@@ -53,11 +53,12 @@ Phase 6
 ### Phase 6: Stage 4 Evidence and Claude Review
 - [x] 只用已验证事实完成 README、release report 和安装材料
 - [x] 固化源码、构件、运行态与截图身份
-- [x] 保留 R1/R1A 通知与回执，并记录 R1A HOLD
-- [ ] 创建 R2 通知并先执行 Claude dry-run
-- [ ] 运行唯一只读 Claude 审核链并校验独立回执
-- [ ] 对 GO 独立复查；对 HOLD 保留 R1 并以新 R2 收口
-- **Status:** in_progress (R1A 修复已验证，待提交后执行 R2)
+- [x] 保留 R1/R1A/R2 通知与回执，并记录 R1A/R2 HOLD
+- [x] 创建 R2 通知并执行 Claude dry-run 与唯一只读审核链
+- [x] 修复 R2 blocking finding 并完成最高信号验证
+- [ ] 创建 R3 通知并执行唯一只读审核链
+- [ ] 对 GO 独立复查；对 HOLD 保留历史回执并继续新轮次
+- **Status:** in_progress (R2 HOLD 已修复，待 R3)
 
 ### Phase 7: Publication Eligibility and Handoff
 - [x] 核验 GitHub owner、visibility、远端与真实 `created_at`

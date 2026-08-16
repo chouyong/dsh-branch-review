@@ -85,6 +85,14 @@
 - **Current package:** tarball SHA-256 `28523FCF5349B6BF17AA1F3A3FC66947BECB3232AC7174C92F4260DB9583D9EA`.
 - **Gate classification:** `PASS_AFTER_CHANGES`; GitHub remains `WAITING_ELIGIBILITY` until `2026-08-17T11:35:26Z` and Claude `GO`.
 
+### R2 Review and Repair: 2026-08-16
+- **R2 invocation:** dry-run passed; the single safe-mode Claude chain completed with a validated receipt `docs/CLAUDE_TO_CODEX_REVIEW_RECEIPT_R2.md` and `FINAL_DECISION: HOLD`.
+- **Blocking finding:** reverse-oriented editor status buttons compared stored orientation instead of viewer orientation, so the active state and `aria-pressed` were inverted and reverse writes appeared dead.
+- **Repair:** `DecisionQueue.tsx` now derives viewed status through `statusForPair`; `ReviewStore` fail-closes all parse errors with explicit valid import recovery, filters unrelated `storageArea` events, and returns only persisted records; record creation trims identifiers.
+- **Focused verification:** `npm run typecheck`, targeted tests (15), full `npm run verify` (17 tests), `graphify update .`, and real browser gate all passed.
+- **New commit:** `0fba29e` (`fix: orient reverse decision controls`); latest browser receipt `2026-08-16T13:39:35.896Z`, bundle SHA-256 `576A793485160CF30BBCF0F0C29AF06CB1EAD611BAF883261C49B5A9A761B733`, zero console/page/request errors.
+- **Next:** preserve R2 HOLD, create R3 notice/receipt, run a new dry-run and one safe-mode read-only Claude chain; PR remains forbidden.
+
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
 |-----------|-------|---------|------------|
@@ -125,8 +133,8 @@
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
-| Where am I? | Phase 6: R1A repair verified; R2 Claude review is next |
-| Where am I going? | Commit focused repair → R2 read-only review → final eligibility recheck |
+| Where am I? | Phase 6: R2 HOLD repaired; R3 Claude review is next |
+| Where am I going? | Commit evidence refresh → R3 read-only review → final eligibility recheck |
 | What's the goal? | Deliver a verified DSH branch-review decision queue without violating privacy, lineage, or PR gates |
 | What have I learned? | See `findings.md` |
 | What have I done? | Verified the repair, refreshed CodeGraph and real browser evidence, and updated release ledgers |

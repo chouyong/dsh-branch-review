@@ -7,9 +7,9 @@
 ## Verified Artifact
 
 - Package: `dsh-branch-review@0.1.0`
-- Tarball: `dsh-branch-review-0.1.0.tgz`, SHA-256 `28523FCF5349B6BF17AA1F3A3FC66947BECB3232AC7174C92F4260DB9583D9EA`
-- Browser bundle: `lib/client.js`, SHA-256 `2A579A3AF043F6B1EA924D371234676111FF3812A0FC142D7B2B3238B5B7C515`
-- `npm run verify`: typecheck, production build, 4 test files / 15 tests, bundle contract and package contract all pass
+- Tarball: `dsh-branch-review-0.1.0.tgz`, SHA-256 `47D8CA9DF4895DD7CB22D216691EAB0076AD1E32DE57EF873E943CABDDE158A9`
+- Browser bundle: `lib/client.js`, SHA-256 `576A793485160CF30BBCF0F0C29AF06CB1EAD611BAF883261C49B5A9A761B733`
+- `npm run verify`: typecheck, production build, 4 test files / 17 tests, bundle contract and package contract all pass
 
 ## Real Runtime
 
@@ -35,4 +35,4 @@ Evidence files:
 
 ## Publication Hold
 
-GitHub repository creation was verified at `2026-08-16T11:35:26Z`; `eligible_after` is `2026-08-17T11:35:26Z`. The product history now has 12 real functional/documentation commits, but Claude has not yet returned `FINAL_DECISION: GO` and the target-list contribution rules have not been re-read. Keep `docs/publication-eligibility.md` at `WAITING_ELIGIBILITY`; do not create a PR, merge automatically, or force-push.
+GitHub repository creation was verified at `2026-08-16T11:35:26Z`; `eligible_after` is `2026-08-17T11:35:26Z`. The product history now has 14 real functional/documentation commits, but Claude R2 returned `FINAL_DECISION: HOLD`; preserve R1A/R2 receipts and require a new independent R3 `GO` before any publication consideration. Keep `docs/publication-eligibility.md` at `WAITING_ELIGIBILITY`; do not create a PR, merge automatically, or force-push.

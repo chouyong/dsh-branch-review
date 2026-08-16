@@ -25,7 +25,7 @@ The repository is younger than 24 hours. PR creation is forbidden until the exac
 - [x] Stage 0→3 real DSH gate passes with no unverified required behavior
 - [x] Genuine screenshots and short GIF are present and tied to the verified artifact/runtime
 - [x] Release/install source is reproducible and documentation claims are verified
-- [ ] Claude final receipt has exactly one final marker: `FINAL_DECISION: GO`
+- [ ] Claude final receipt has exactly one final marker: `FINAL_DECISION: GO` (R2 is `HOLD`; require a distinct R3 receipt)
 - [ ] Target list contribution rules and focused diff are re-read before any awesome-list PR
 
 Until every checkbox is independently proven, do not open a PR, merge automatically, force-push, or treat this waiting state as a blocker for continued local development.
