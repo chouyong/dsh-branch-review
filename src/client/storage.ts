@@ -43,19 +43,23 @@ export class ReviewStore {
     this.load()
     if (typeof window !== 'undefined') {
       this.storageListener = (event) => {
+        if (event.storageArea !== null && event.storageArea !== (this.storage as StorageLike | undefined)) return
         if (event.key === null) {
           this.current = { records: [], error: undefined }
+          this.writesBlocked = false
           this.emit()
           return
         }
         if (event.key !== STORAGE_KEY) return
         if (event.newValue === null) {
           this.current = { records: [], error: undefined }
+          this.writesBlocked = false
           this.emit()
           return
         }
         const parsed = parseReviewRecords(event.newValue)
         if (!parsed.ok) {
+          this.writesBlocked = true
           this.setError(parsed.error)
           return
         }
@@ -75,20 +79,19 @@ export class ReviewStore {
     return () => { this.listeners.delete(listener) }
   }
 
-  ensureRecord(leftSessionId: string, rightSessionId: string, now: number): ReviewRecord {
+  ensureRecord(leftSessionId: string, rightSessionId: string, now: number): ReviewRecord | undefined {
     const existing = this.current.records.find(record => pairKey(record.leftSessionId, record.rightSessionId) === pairKey(leftSessionId, rightSessionId))
     if (existing !== undefined) return existing
     const record = createReviewRecord({ leftSessionId, rightSessionId, now })
-    this.write(mergeReviewRecords(this.current.records, [record]))
-    return record
+    if (!this.write(mergeReviewRecords(this.current.records, [record]))) return undefined
+    return this.current.records.find(value => value.recordId === record.recordId)
   }
 
   update(recordId: string, patch: ReviewPatch, now: number): ReviewRecord | undefined {
     const existing = this.current.records.find(record => record.recordId === recordId)
     if (existing === undefined) return undefined
     const updated = updateReviewRecord(existing, patch, now)
-    this.write(this.current.records.map(record => record.recordId === recordId ? updated : record))
-    return updated
+    return this.write(this.current.records.map(record => record.recordId === recordId ? updated : record)) ? updated : existing
   }
 
   importJson(raw: string, isAllowed?: (record: ReviewRecord) => boolean): boolean {
@@ -101,8 +104,7 @@ export class ReviewStore {
       this.setError('ineligible-record')
       return false
     }
-    this.write(mergeReviewRecords(this.current.records, parsed.records))
-    return true
+    return this.write(mergeReviewRecords(this.current.records, parsed.records), true)
   }
 
   exportJson(): string {
@@ -127,32 +129,34 @@ export class ReviewStore {
     const parsed = parseReviewRecords(raw)
     if (parsed.ok) this.current = { records: parsed.records, error: undefined }
     else {
-      this.writesBlocked = parsed.error === 'payload-too-large'
+      this.writesBlocked = true
       this.setError(parsed.error)
     }
   }
 
-  private write(records: readonly ReviewRecord[]): void {
-    if (this.writesBlocked) {
-      this.setError('payload-too-large')
-      return
+  private write(records: readonly ReviewRecord[], allowBlocked = false): boolean {
+    if (this.writesBlocked && !allowBlocked) {
+      return false
     }
     const normalized = [...records]
     const serialized = serializeReviewRecords(normalized)
     if (serializedByteLength(serialized) > MAX_SERIALIZED_BYTES) {
+      this.writesBlocked = true
       this.setError('payload-too-large')
-      return
+      return false
     }
     if (this.storage !== undefined) {
       try {
         this.storage.setItem(STORAGE_KEY, serialized)
       } catch {
         this.setError('write-failed')
-        return
+        return false
       }
     }
+    this.writesBlocked = false
     this.current = { records: normalized, error: undefined }
     this.emit()
+    return true
   }
 
   private setError(error: string): void {

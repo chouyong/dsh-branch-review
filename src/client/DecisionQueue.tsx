@@ -214,7 +214,11 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
               {selectedHealth === 'orphaned' ? <div className={`${CSS_PREFIX}__notice`}>{t('degraded')}</div> : null}
               {selectedRecord === undefined ? <div className={`${CSS_PREFIX}__empty`}>{t('noRecord')}</div> : (
                 <>
-                  <label className={`${CSS_PREFIX}__label`}>{t('status')}<span className={`${CSS_PREFIX}__statuses`}>{REVIEW_STATUSES.map(status => <button key={status} type="button" className={`${CSS_PREFIX}__status${selectedRecord.status === status ? ` ${CSS_PREFIX}__status--active` : ''}`} aria-pressed={selectedRecord.status === status} onClick={() => { updateStatus(status) }}>{t(STATUS_LABELS[status])}</button>)}</span></label>
+                  <label className={`${CSS_PREFIX}__label`}>{t('status')}<span className={`${CSS_PREFIX}__statuses`}>{REVIEW_STATUSES.map(status => {
+                    const viewedStatus = statusForPair([selectedRecord], sessionId, selectedCandidate.id)
+                    const active = viewedStatus === status
+                    return <button key={status} type="button" className={`${CSS_PREFIX}__status${active ? ` ${CSS_PREFIX}__status--active` : ''}`} aria-pressed={active} onClick={() => { updateStatus(status) }}>{t(STATUS_LABELS[status])}</button>
+                  })}</span></label>
                   <label className={`${CSS_PREFIX}__label`}>{t('reason')}<textarea className={`${CSS_PREFIX}__input ${CSS_PREFIX}__textarea`} value={reason} onChange={event => { setReason(event.target.value) }} /></label>
                   <label className={`${CSS_PREFIX}__label`}>{t('tags')}<input className={`${CSS_PREFIX}__input`} value={tags} onChange={event => { setTags(event.target.value) }} /></label>
                   <label className={`${CSS_PREFIX}__label`}>{t('links')}<textarea className={`${CSS_PREFIX}__input ${CSS_PREFIX}__textarea`} value={links} onChange={event => { setLinks(event.target.value) }} /></label>

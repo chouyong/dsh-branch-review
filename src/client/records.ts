@@ -147,12 +147,15 @@ function deduplicate(records: readonly ReviewRecord[]): readonly ReviewRecord[] 
 }
 
 export function createReviewRecord(input: ReviewRecordInput): ReviewRecord {
-  const recordId = input.recordId ?? globalThis.crypto?.randomUUID?.() ?? `review-${input.now}-${fallbackId++}`
+  const leftSessionId = input.leftSessionId.trim()
+  const rightSessionId = input.rightSessionId.trim()
+  const generatedId = globalThis.crypto?.randomUUID?.() ?? `review-${input.now}-${fallbackId++}`
+  const recordId = input.recordId?.trim() || generatedId
   return {
     schemaVersion: REVIEW_SCHEMA_VERSION,
     recordId,
-    leftSessionId: input.leftSessionId,
-    rightSessionId: input.rightSessionId,
+    leftSessionId,
+    rightSessionId,
     status: 'unresolved',
     reason: '',
     tags: [],
@@ -210,7 +213,7 @@ export function mergeReviewRecords(
 }
 
 export function pairKey(leftSessionId: string, rightSessionId: string): string {
-  return [leftSessionId, rightSessionId].sort().join('\u0000')
+  return [leftSessionId.trim(), rightSessionId.trim()].sort().join('\u0000')
 }
 
 export function invertStatus(status: ReviewStatus): ReviewStatus {

@@ -46,4 +46,11 @@ describe('review records', () => {
     expect(mergeReviewRecords([left], [right])).toHaveLength(1)
     expect(updateReviewRecord(right, { reason: 'later' }, 0).updatedAt).toBe(2)
   })
+
+  it('normalizes identifiers when creating records', () => {
+    const record = createReviewRecord({ leftSessionId: ' left ', rightSessionId: ' right ', recordId: ' id ', now: 1 })
+    expect(record.leftSessionId).toBe('left')
+    expect(record.rightSessionId).toBe('right')
+    expect(record.recordId).toBe('id')
+  })
 })
