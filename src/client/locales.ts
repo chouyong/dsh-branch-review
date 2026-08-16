@@ -15,6 +15,7 @@ const MESSAGES = {
   resolved: 'Resolved',
   followUp: 'Follow-up',
   orphaned: 'Orphaned',
+  active: 'Active',
   summary: 'Queue summary',
   summaryAll: 'All',
   summaryUnresolved: 'Unresolved',

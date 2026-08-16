@@ -13,7 +13,7 @@ export interface DecisionQueueProps {
   readonly useSessionList: SessionListSelector
   readonly open: (id: SessionId) => void
   readonly store: ReviewStore
-  readonly t: (key: 'trigger' | 'title' | 'candidate' | 'status' | 'reason' | 'tags' | 'links' | 'save' | 'open' | 'export' | 'import' | 'all' | 'unresolved' | 'resolved' | 'followUp' | 'orphaned' | 'noCandidate' | 'noRecord' | 'noQueue' | 'degraded' | 'invalidImport' | 'storageError' | 'summary' | 'summaryAll' | 'summaryUnresolved' | 'summaryResolved' | 'summaryFollowUp' | 'summaryOrphaned' | 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus') => string
+  readonly t: (key: 'trigger' | 'title' | 'candidate' | 'status' | 'reason' | 'tags' | 'links' | 'save' | 'open' | 'export' | 'import' | 'all' | 'unresolved' | 'resolved' | 'followUp' | 'orphaned' | 'active' | 'noCandidate' | 'noRecord' | 'noQueue' | 'degraded' | 'invalidImport' | 'storageError' | 'summary' | 'summaryAll' | 'summaryUnresolved' | 'summaryResolved' | 'summaryFollowUp' | 'summaryOrphaned' | 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus') => string
 }
 
 type StatusMessageKey = 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus'
@@ -200,7 +200,7 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
               return (
                 <button key={record.recordId} type="button" className={`${CSS_PREFIX}__queue-item${selected ? ` ${CSS_PREFIX}__queue-item--selected` : ''}`} onClick={() => { setSelectedRightId(otherId) }}>
                   <span className={`${CSS_PREFIX}__queue-name`}>{title}</span>
-                  <span className={`${CSS_PREFIX}__queue-meta`}>{record.status} · {recordHealth(listState, record.leftSessionId, record.rightSessionId)}</span>
+                  <span className={`${CSS_PREFIX}__queue-meta`}>{t(STATUS_LABELS[record.status])} · {t(recordHealth(listState, record.leftSessionId, record.rightSessionId))}</span>
                 </button>
               )
             })}
