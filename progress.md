@@ -97,7 +97,7 @@
 - **R3 invocation:** dry-run passed; the single safe-mode Claude chain completed with exactly one final marker in `docs/CLAUDE_TO_CODEX_REVIEW_RECEIPT_R3.md`: `FINAL_DECISION: GO`.
 - **Independent Codex checks:** marker count is 1; `git diff --check a68be65..0fba29e` passed; `npm run verify` passed with 17 tests; no blocking finding remains in the reviewed repair scope.
 - **Residual non-blockers:** Claude recorded no UI test harness, untested StorageEvent/read-failed paths, and import-only recovery tradeoffs; these are documented risks, not a release or human approval.
-- **Publication state:** GitHub repository has 17 real commits but remains `WAITING_ELIGIBILITY` until `2026-08-17T11:35:26Z` and target-list rules are re-read; PR creation remains forbidden.
+- **Publication state:** GitHub repository has 18 real commits but remains `WAITING_ELIGIBILITY` until `2026-08-17T11:35:26Z` and target-list rules are re-read; PR creation remains forbidden.
 
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
