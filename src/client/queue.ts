@@ -12,6 +12,16 @@ export interface QueueCounts {
   readonly orphaned: number
 }
 
+export function statusForPair(
+  records: readonly ReviewRecord[],
+  leftSessionId: string,
+  rightSessionId: string,
+): ReviewStatus | undefined {
+  return records.find(record =>
+    record.leftSessionId === leftSessionId && record.rightSessionId === rightSessionId
+      || record.leftSessionId === rightSessionId && record.rightSessionId === leftSessionId)?.status
+}
+
 export function matchesQueueFilter(
   record: ReviewRecord,
   state: Pick<SessionListState, 'byId'>,

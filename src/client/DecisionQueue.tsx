@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'reac
 import type { SessionId, SessionListState } from './contract.ts'
 import { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
 import { REVIEW_STATUSES, type ReviewStatus } from './records.ts'
-import { countQueue, sortQueue, type QueueFilter } from './queue.ts'
+import { countQueue, sortQueue, statusForPair, type QueueFilter } from './queue.ts'
 import { ReviewStore } from './storage.ts'
 import { CSS_PREFIX } from './styles-prefix.ts'
 
@@ -165,7 +165,10 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
             <label className={`${CSS_PREFIX}__label`}>
               {t('candidate')}
               <select className={`${CSS_PREFIX}__select`} value={selectedRightId ?? ''} onChange={event => { setSelectedRightId(event.target.value) }}>
-                {candidates.map(candidate => <option key={candidate.id} value={candidate.id}>{candidate.title} · {candidate.relation}</option>)}
+                {candidates.map(candidate => {
+                  const candidateStatus = statusForPair(snapshot.records, sessionId, candidate.id)
+                  return <option key={candidate.id} value={candidate.id}>{candidate.title} · {candidate.relation}{candidateStatus === undefined ? '' : ` · ${candidateStatus}`}</option>
+                })}
               </select>
             </label>
             <label className={`${CSS_PREFIX}__label`}>

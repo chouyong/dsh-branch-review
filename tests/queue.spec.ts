@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { SessionId, type SessionListState } from '../src/client/contract.ts'
 import { createReviewRecord } from '../src/client/records.ts'
-import { countQueue, matchesQueueFilter, sortQueue } from '../src/client/queue.ts'
+import { countQueue, matchesQueueFilter, sortQueue, statusForPair } from '../src/client/queue.ts'
 
 const list: SessionListState = {
   ids: [SessionId('left'), SessionId('right')],
@@ -33,5 +33,11 @@ describe('review queue', () => {
       followUp: 1,
       orphaned: 2,
     })
+  })
+
+  it('finds a decision regardless of pair orientation', () => {
+    const record = { ...createReviewRecord({ leftSessionId: 'right', rightSessionId: 'left', now: 1, recordId: 'r' }), status: 'keep-right' as const }
+    expect(statusForPair([record], 'left', 'right')).toBe('keep-right')
+    expect(statusForPair([], 'left', 'right')).toBeUndefined()
   })
 })
