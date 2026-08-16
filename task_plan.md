@@ -67,7 +67,7 @@ Phase 6
 - [x] 核验最终 Claude GO
 - [ ] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
 - [ ] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
-- **Status:** pending
+- **Status:** in_progress (all technical gates and Claude R3 GO complete; waiting on GitHub eligibility timestamp)
 
 ## Key Questions
 1. 当前可安装 DSH 版本实际提供哪个 UI slot？
