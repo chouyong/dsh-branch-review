@@ -76,6 +76,15 @@
 | Session catchup | local project root | Existing unsynced context is reported, or empty when none exists | Empty report; no prior planning files existed | PASS |
 | CodeGraph initialization | `codegraph init -i` | Local index initializes without touching read-only sources | Initialized successfully; 0 files indexed before source exists | PASS |
 
+### Session Continuation: 2026-08-16
+- **R1A repair verification:** `npm run verify` passed typecheck, production build, 4 test files / 15 tests, bundle contract, and package contract.
+- **CodeGraph:** `graphify update .` rebuilt 668 nodes, 792 edges, and 36 communities.
+- **Real browser gate:** `npm run verify:browser` passed against DSH `0.1.0-rc.5` and Edge `151.0.4129.86`; root/plugin HTTP 200, candidate count 3, states `keep-left`/`keep-right`/`follow-up`, reload/filter/navigation/import/export/mobile pass, console/page/request errors 0.
+- **Current browser bundle:** local and served SHA-256 `2A579A3AF043F6B1EA924D371234676111FF3812A0FC142D7B2B3238B5B7C515`; receipt generated `2026-08-16T13:24:03.773Z`.
+- **Current genuine evidence:** desktop `049922BDBCDBC4E0B4299936CAC805D0A0E0EFBF06C5E4FCCE54E6ADF2F7E7AE`; decisions `C0A1FA19C93FCAFE39FF2539CBCA6D6FAAE012F750FF5121C6331BCC020133AE`; mobile `13AA8DF909CCB01541EBB5202915B291FBB06B9D3A26599B32BCF8B419884F75`; GIF `2FB5C9244522E10FAC81DC8E8796D73CF25D7EDC0E8FDF5AF88B02A8FB787826`.
+- **Current package:** tarball SHA-256 `28523FCF5349B6BF17AA1F3A3FC66947BECB3232AC7174C92F4260DB9583D9EA`.
+- **Gate classification:** `PASS_AFTER_CHANGES`; GitHub remains `WAITING_ELIGIBILITY` until `2026-08-17T11:35:26Z` and Claude `GO`.
+
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
 |-----------|-------|---------|------------|
@@ -116,8 +125,8 @@
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
-| Where am I? | Phase 1: repository rules, preflight, CodeGraph evidence, and Stage 0 |
-| Where am I going? | Domain core → storage/UI → build/install → real runtime → Claude review → publication eligibility |
+| Where am I? | Phase 6: R1A repair verified; R2 Claude review is next |
+| Where am I going? | Commit focused repair → R2 read-only review → final eligibility recheck |
 | What's the goal? | Deliver a verified DSH branch-review decision queue without violating privacy, lineage, or PR gates |
 | What have I learned? | See `findings.md` |
-| What have I done? | Read the startup contract and skills, recovered context, and created persistent planning files |
+| What have I done? | Verified the repair, refreshed CodeGraph and real browser evidence, and updated release ledgers |

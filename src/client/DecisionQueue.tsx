@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import type { SessionId, SessionListState } from './contract.ts'
 import { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
-import { REVIEW_STATUSES, type ReviewStatus } from './records.ts'
-import { countQueue, sortQueue, statusForPair, type QueueFilter } from './queue.ts'
+import { invertStatus, REVIEW_STATUSES, type ReviewStatus } from './records.ts'
+import { countQueue, recordForPair, sortQueue, statusForPair, type QueueFilter } from './queue.ts'
 import { ReviewStore } from './storage.ts'
 import { CSS_PREFIX } from './styles-prefix.ts'
 
@@ -62,7 +62,7 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
   const selectedCandidate = candidates.find(candidate => candidate.id === selectedRightId) ?? candidates[0]
   const selectedRecord = selectedCandidate === undefined
     ? undefined
-    : snapshot.records.find(record => record.leftSessionId === sessionId && record.rightSessionId === selectedCandidate.id)
+    : recordForPair(snapshot.records, sessionId, selectedCandidate.id)
   const visibleRecords = sortQueue(snapshot.records, listState, filter, sessionId)
   const counts = countQueue(snapshot.records, listState, sessionId)
   const hasTrigger = candidates.length > 0 || currentRecords.length > 0
@@ -119,7 +119,10 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
   }
 
   const updateStatus = (status: ReviewStatus): void => {
-    if (selectedRecord !== undefined) store.update(selectedRecord.recordId, { status }, now())
+    if (selectedRecord !== undefined) {
+      const storedStatus = selectedRecord.leftSessionId === sessionId ? status : invertStatus(status)
+      store.update(selectedRecord.recordId, { status: storedStatus }, now())
+    }
   }
 
   const saveShortcut = (event: ReactKeyboardEvent<HTMLElement>): void => {
@@ -200,7 +203,7 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
               return (
                 <button key={record.recordId} type="button" className={`${CSS_PREFIX}__queue-item${selected ? ` ${CSS_PREFIX}__queue-item--selected` : ''}`} onClick={() => { setSelectedRightId(otherId) }}>
                   <span className={`${CSS_PREFIX}__queue-name`}>{title}</span>
-                  <span className={`${CSS_PREFIX}__queue-meta`}>{t(STATUS_LABELS[record.status])} · {t(recordHealth(listState, record.leftSessionId, record.rightSessionId))}</span>
+                  <span className={`${CSS_PREFIX}__queue-meta`}>{t(STATUS_LABELS[statusForPair([record], sessionId, otherId) ?? 'unresolved'])} · {t(recordHealth(listState, record.leftSessionId, record.rightSessionId))}</span>
                 </button>
               )
             })}

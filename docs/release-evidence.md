@@ -13,11 +13,11 @@
 - Repository: `dsh-branch-review`
 - Absolute path: `D:\knowledgeBase\dsh-branch-review`
 - Initial Git state: 2026-08-16 首次预检时不是 Git 仓库；随后按启动文档授权初始化本地 `main`
-- Source commit: `fd010c4` (`chore: establish branch review project contract`)
+- Source commit: `6786229` (`docs: refresh release report`)
 - Dirty worktree: 首个提交后需用 scoped Git 复核；`.codegraph/` 是忽略的本地生成索引
 - Remotes: `origin=https://github.com/chouyong/dsh-branch-review.git`
 - Plugin package/version: `dsh-branch-review@0.1.0`
-- Artifact SHA-256: tarball `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; browser bundle `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
+- Artifact SHA-256: tarball `28523FCF5349B6BF17AA1F3A3FC66947BECB3232AC7174C92F4260DB9583D9EA`; browser bundle `2A579A3AF043F6B1EA924D371234676111FF3812A0FC142D7B2B3238B5B7C515`
 - DSH source/executable: source `D:\knowledgeBase\deepseek-harness`, built CLI `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`, version `0.1.0-rc.5`
 - Effective DSH home/profile: `D:\dsh-home` / `D:\dsh-home\profiles\web`; profile manifest contains `dsh-branch-review` as a link dependency and the existing read-only `dsh-fork-graph` fixture
 - Relay base URL/model discovery endpoint/web port: 待核验；不得记录秘密值
@@ -56,20 +56,20 @@
 
 - Dependency command and flags: `npm install --ignore-scripts --legacy-peer-deps`; added dev-only `playwright-core`, `pngjs`, `gif-encoder-2` for the browser gate
 - Typecheck: PASS (`npm run typecheck`)
-- Production build: PASS (`npm run build`); browser bundle 37,890 bytes
+- Production build: PASS (`npm run build`); browser bundle 39,179 bytes
 - Bundle contract: PASS (`npm run test:bundle`)
-- Full tests: PASS (`npm test`, 4 files / 9 tests)
+- Full tests: PASS (`npm test`, 4 files / 15 tests)
 - Package contract: PASS (`npm run verify:package`)
 - DSH prerequisite: running official `0.1.0-rc.5` CLI at `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`; PID `14080`, port `3091`
 - Documented install attempt 1: failed, restricted shell `EPERM` while opening `D:\dsh-home\profiles\web\_tmp_*`; exact CLI category `pnpm failed in profile directory`
 - Documented install attempt 2: passed after controlled elevation; profile dependency is `dsh-branch-review link:D:/knowledgeBase/dsh-branch-review`, pnpm `11.7.0`, supply-chain lock verified
 - Tarball fallback: not used; official link install passed after environment permission correction
-- Artifact identity: `dsh-branch-review-0.1.0.tgz`, 21 files, SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; `lib/client.js` SHA-256 `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
+- Artifact identity: `dsh-branch-review-0.1.0.tgz`, 21 files, SHA-256 `28523FCF5349B6BF17AA1F3A3FC66947BECB3232AC7174C92F4260DB9583D9EA`; `lib/client.js` SHA-256 `2A579A3AF043F6B1EA924D371234676111FF3812A0FC142D7B2B3238B5B7C515`
 
 ## Stage 2: Runtime Load
 
 - Isolated D-drive profile/home: PASS for `D:\dsh-home\profiles\web`; link dependency and lockfile were re-read after install
-- Plugin client asset HTTP status: PASS, root and asset HTTP 200; served/local SHA-256 both `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
+- Plugin client asset HTTP status: PASS, root and asset HTTP 200; served/local SHA-256 both `2A579A3AF043F6B1EA924D371234676111FF3812A0FC142D7B2B3238B5B7C515`
 - Style node and slot presence: PASS, `#dsh-branch-review-style` count 1 and visible `Branch review` slot trigger
 - Console errors: PASS, 0
 - Page errors: PASS, 0
@@ -86,13 +86,13 @@
 - Desktop and 390px mobile results: PASS, no horizontal overflow; mobile panel bounded to 390x844
 - Genuine screenshot paths and capture attempt: PASS, `assets/branch-review-desktop.png`, `assets/branch-review-decisions.png`, `assets/branch-review-mobile.png`
 - Short GIF path and capture attempt: PASS, `assets/branch-review-flow.gif`, 3 real Edge frames
-- Browser receipt: `docs/browser-gate-receipt.json`, Edge `151.0.4129.86`, DSH `0.1.0-rc.5`, generated `2026-08-16T13:00:59.573Z`
-- Screenshot SHA-256: desktop `9D71DA2D12DE452DAEB0FCDFA7AB03961ED9CD3D07E54886F87DC2FB2E9BED7C`; decisions `5E00A406CAD4F7032A599128B209BAF905A296412C51CC89803F747FBF9630BB`; mobile `2898C1E9653D49A896CCB53F59825DFC7244FBA22CB20ECED363A8B1765FF2E2`; GIF `09C211B9A10AFE1CD725945B1AD3E5947868D9D139655254AD892C32DF39E407`
+- Browser receipt: `docs/browser-gate-receipt.json`, Edge `151.0.4129.86`, DSH `0.1.0-rc.5`, generated `2026-08-16T13:24:03.773Z`
+- Screenshot SHA-256: desktop `049922BDBCDBC4E0B4299936CAC805D0A0E0EFBF06C5E4FCCE54E6ADF2F7E7AE`; decisions `C0A1FA19C93FCAFE39FF2539CBCA6D6FAAE012F750FF5121C6331BCC020133AE`; mobile `13AA8DF909CCB01541EBB5202915B291FBB06B9D3A26599B32BCF8B419884F75`; GIF `2FB5C9244522E10FAC81DC8E8796D73CF25D7EDC0E8FDF5AF88B02A8FB787826`
 
 ## Stage 4: Publication
 
 - Verified documentation claims: README now links only to generated local evidence and states that GitHub Release URL is not yet available
-- Commit history count and identities: 3 pushed product commits before this evidence milestone; this milestone must be committed as a real functional/documentation change, not an empty count filler
+- Commit history count and identities: 12 real functional/documentation commits are present through `6786229`; the R1A repair remains uncommitted until its focused verification and review notice are complete
 - GitHub owner/visibility/created_at/eligible_after: 以唯一台账 `docs/publication-eligibility.md` 为准
 - GitHub API `created_at` and `eligible_after`: see `docs/publication-eligibility.md` (created_at recorded; 24-hour window still open)
 - Claude review: not started; now eligible to begin after this evidence and the next verification commit; must use dry-run then one read-only chain

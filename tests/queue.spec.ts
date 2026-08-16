@@ -37,7 +37,7 @@ describe('review queue', () => {
 
   it('finds a decision regardless of pair orientation', () => {
     const record = { ...createReviewRecord({ leftSessionId: 'right', rightSessionId: 'left', now: 1, recordId: 'r' }), status: 'keep-right' as const }
-    expect(statusForPair([record], 'left', 'right')).toBe('keep-right')
+    expect(statusForPair([record], 'left', 'right')).toBe('keep-left')
     expect(statusForPair([], 'left', 'right')).toBeUndefined()
   })
 

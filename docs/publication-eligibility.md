@@ -22,9 +22,9 @@ The repository is younger than 24 hours. PR creation is forbidden until the exac
 
 - [ ] Current time is at or after `2026-08-17T11:35:26Z`, rechecked from GitHub API evidence
 - [x] Product repository has at least 10 real, functional, reviewable commits (10 commits on `main` at `355a69d`)
-- [ ] Stage 0→3 real DSH gate passes with no unverified required behavior
-- [ ] Genuine screenshots and short GIF are present and tied to the verified artifact/runtime
-- [ ] Release/install source is reproducible and documentation claims are verified
+- [x] Stage 0→3 real DSH gate passes with no unverified required behavior
+- [x] Genuine screenshots and short GIF are present and tied to the verified artifact/runtime
+- [x] Release/install source is reproducible and documentation claims are verified
 - [ ] Claude final receipt has exactly one final marker: `FINAL_DECISION: GO`
 - [ ] Target list contribution rules and focused diff are re-read before any awesome-list PR
 

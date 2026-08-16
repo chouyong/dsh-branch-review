@@ -31,10 +31,19 @@ describe('review records', () => {
     expect(parseReviewRecords('{')).toEqual({ ok: false, error: 'invalid-json' })
     expect(parseReviewRecords(JSON.stringify({ schemaVersion: 9, records: [] }))).toEqual({ ok: false, error: 'unsupported-schema' })
     expect(parseReviewRecords(JSON.stringify({ schemaVersion: 1, records: [{ schemaVersion: 1 }] }))).toEqual({ ok: false, error: 'invalid-record' })
+    const whitespace = { ...createReviewRecord({ leftSessionId: 'left', rightSessionId: 'right', now: 1, recordId: 'r' }), recordId: '  ' }
+    expect(parseReviewRecords(serializeReviewRecords([whitespace]))).toEqual({ ok: false, error: 'invalid-record' })
   })
 
   it('rejects oversized serialized payloads before parsing', () => {
     const raw = JSON.stringify({ schemaVersion: 1, records: [], padding: 'x'.repeat(520_000) })
     expect(parseReviewRecords(raw)).toEqual({ ok: false, error: 'payload-too-large' })
+  })
+
+  it('deduplicates a pair regardless of orientation and keeps timestamps monotonic', () => {
+    const left = createReviewRecord({ leftSessionId: 'a', rightSessionId: 'b', now: 1, recordId: 'left' })
+    const right = { ...createReviewRecord({ leftSessionId: 'b', rightSessionId: 'a', now: 2, recordId: 'right' }), status: 'keep-right' as const }
+    expect(mergeReviewRecords([left], [right])).toHaveLength(1)
+    expect(updateReviewRecord(right, { reason: 'later' }, 0).updatedAt).toBe(2)
   })
 })

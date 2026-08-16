@@ -1,5 +1,5 @@
 import type { SessionListState } from './contract.ts'
-import type { ReviewRecord, ReviewStatus } from './records.ts'
+import { invertStatus, type ReviewRecord, type ReviewStatus } from './records.ts'
 import { recordHealth } from './lineage.ts'
 
 export type QueueFilter = 'all' | 'unresolved' | 'resolved' | 'follow-up' | 'orphaned'
@@ -17,9 +17,19 @@ export function statusForPair(
   leftSessionId: string,
   rightSessionId: string,
 ): ReviewStatus | undefined {
+  const record = recordForPair(records, leftSessionId, rightSessionId)
+  if (record === undefined) return undefined
+  return record.leftSessionId === leftSessionId ? record.status : invertStatus(record.status)
+}
+
+export function recordForPair(
+  records: readonly ReviewRecord[],
+  leftSessionId: string,
+  rightSessionId: string,
+): ReviewRecord | undefined {
   return records.find(record =>
     record.leftSessionId === leftSessionId && record.rightSessionId === rightSessionId
-      || record.leftSessionId === rightSessionId && record.rightSessionId === leftSessionId)?.status
+      || record.leftSessionId === rightSessionId && record.rightSessionId === leftSessionId)
 }
 
 export function matchesQueueFilter(
@@ -64,8 +74,4 @@ export function countQueue(
     if (matchesQueueFilter(record, state, 'orphaned')) counts.orphaned += 1
   }
   return counts
-}
-
-export function statusLabel(status: ReviewStatus): string {
-  return status
 }

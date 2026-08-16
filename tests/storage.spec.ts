@@ -45,4 +45,14 @@ describe('review storage', () => {
     expect(store.snapshot.records).toEqual([])
     expect(store.snapshot.error).toBe('ineligible-record')
   })
+
+  it('does not overwrite an intact oversized snapshot after load failure', () => {
+    const storage = new MemoryStorage()
+    const oversized = JSON.stringify({ schemaVersion: 1, records: [], padding: 'x'.repeat(520_000) })
+    storage.values.set(STORAGE_KEY, oversized)
+    const store = new ReviewStore(storage)
+    store.ensureRecord('left', 'right', 10)
+    expect(storage.values.get(STORAGE_KEY)).toBe(oversized)
+    expect(store.snapshot.error).toBe('payload-too-large')
+  })
 })

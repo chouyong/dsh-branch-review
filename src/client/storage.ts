@@ -3,10 +3,12 @@ import {
   mergeReviewRecords,
   pairKey,
   parseReviewRecords,
+  serializedByteLength,
   serializeReviewRecords,
   updateReviewRecord,
   type ReviewPatch,
   type ReviewRecord,
+  MAX_SERIALIZED_BYTES,
 } from './records.ts'
 
 export const STORAGE_KEY = 'dsh-branch-review.records.v1'
@@ -34,12 +36,18 @@ export class ReviewStore {
   private readonly listeners = new Set<() => void>()
   private readonly storage: StorageLike | undefined
   private readonly storageListener: ((event: StorageEvent) => void) | undefined
+  private writesBlocked = false
 
   constructor(storage: StorageLike | undefined = browserStorage()) {
     this.storage = storage
     this.load()
     if (typeof window !== 'undefined') {
       this.storageListener = (event) => {
+        if (event.key === null) {
+          this.current = { records: [], error: undefined }
+          this.emit()
+          return
+        }
         if (event.key !== STORAGE_KEY) return
         if (event.newValue === null) {
           this.current = { records: [], error: undefined }
@@ -118,14 +126,26 @@ export class ReviewStore {
     if (raw === null) return
     const parsed = parseReviewRecords(raw)
     if (parsed.ok) this.current = { records: parsed.records, error: undefined }
-    else this.setError(parsed.error)
+    else {
+      this.writesBlocked = parsed.error === 'payload-too-large'
+      this.setError(parsed.error)
+    }
   }
 
   private write(records: readonly ReviewRecord[]): void {
+    if (this.writesBlocked) {
+      this.setError('payload-too-large')
+      return
+    }
     const normalized = [...records]
+    const serialized = serializeReviewRecords(normalized)
+    if (serializedByteLength(serialized) > MAX_SERIALIZED_BYTES) {
+      this.setError('payload-too-large')
+      return
+    }
     if (this.storage !== undefined) {
       try {
-        this.storage.setItem(STORAGE_KEY, serializeReviewRecords(normalized))
+        this.storage.setItem(STORAGE_KEY, serialized)
       } catch {
         this.setError('write-failed')
         return

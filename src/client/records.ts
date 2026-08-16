@@ -93,21 +93,20 @@ function isStatus(value: unknown): value is ReviewStatus {
 
 export function validateReviewRecord(value: unknown): ReviewRecord | undefined {
   if (!isRecord(value) || value.schemaVersion !== REVIEW_SCHEMA_VERSION) return undefined
-  const recordId = stringValue(value.recordId)
-  const leftSessionId = stringValue(value.leftSessionId)
-  const rightSessionId = stringValue(value.rightSessionId)
+  const recordId = cleanText(stringValue(value.recordId) ?? '', 120)
+  const leftSessionId = cleanText(stringValue(value.leftSessionId) ?? '', 200)
+  const rightSessionId = cleanText(stringValue(value.rightSessionId) ?? '', 200)
   const status = value.status
   const createdAt = numberValue(value.createdAt)
   const updatedAt = numberValue(value.updatedAt)
-  if (recordId === undefined || recordId === '' || leftSessionId === undefined || leftSessionId === ''
-    || rightSessionId === undefined || rightSessionId === '' || leftSessionId === rightSessionId
+  if (recordId === '' || leftSessionId === '' || rightSessionId === '' || leftSessionId === rightSessionId
     || !isStatus(status) || createdAt === undefined || updatedAt === undefined
     || updatedAt < createdAt) return undefined
   return {
     schemaVersion: REVIEW_SCHEMA_VERSION,
-    recordId: cleanText(recordId, 120),
-    leftSessionId: cleanText(leftSessionId, 200),
-    rightSessionId: cleanText(rightSessionId, 200),
+    recordId,
+    leftSessionId,
+    rightSessionId,
     status,
     reason: cleanText(stringValue(value.reason) ?? '', 500),
     tags: cleanTags(value.tags),
@@ -139,7 +138,7 @@ function migrateLegacy(value: unknown): ReviewRecord | undefined {
 function deduplicate(records: readonly ReviewRecord[]): readonly ReviewRecord[] {
   const byPair = new Map<string, ReviewRecord>()
   for (const record of records) {
-    const key = `${record.leftSessionId}\u0000${record.rightSessionId}`
+    const key = pairKey(record.leftSessionId, record.rightSessionId)
     const current = byPair.get(key)
     if (current === undefined || record.updatedAt > current.updatedAt
       || record.updatedAt === current.updatedAt && record.recordId < current.recordId) byPair.set(key, record)
@@ -171,7 +170,7 @@ export function updateReviewRecord(record: ReviewRecord, patch: ReviewPatch, now
     reason: patch.reason === undefined ? record.reason : cleanText(patch.reason, 500),
     tags: patch.tags === undefined ? record.tags : cleanTags(patch.tags),
     externalLinks: patch.externalLinks === undefined ? record.externalLinks : cleanLinks(patch.externalLinks),
-    updatedAt: Math.max(now, record.createdAt),
+    updatedAt: Math.max(now, record.createdAt, record.updatedAt),
   }
 }
 
@@ -180,7 +179,7 @@ export function serializeReviewRecords(records: readonly ReviewRecord[]): string
 }
 
 export function parseReviewRecords(raw: string): ParseRecordsResult {
-  const bytes = typeof TextEncoder === 'undefined' ? raw.length : new TextEncoder().encode(raw).byteLength
+  const bytes = serializedByteLength(raw)
   if (bytes > MAX_SERIALIZED_BYTES) return { ok: false, error: 'payload-too-large' }
   let parsed: unknown
   try {
@@ -211,5 +210,21 @@ export function mergeReviewRecords(
 }
 
 export function pairKey(leftSessionId: string, rightSessionId: string): string {
-  return `${leftSessionId}\u0000${rightSessionId}`
+  return [leftSessionId, rightSessionId].sort().join('\u0000')
+}
+
+export function invertStatus(status: ReviewStatus): ReviewStatus {
+  if (status === 'keep-left') return 'keep-right'
+  if (status === 'keep-right') return 'keep-left'
+  return status
+}
+
+export function serializedByteLength(raw: string): number {
+  if (typeof TextEncoder !== 'undefined') return new TextEncoder().encode(raw).byteLength
+  let bytes = 0
+  for (const character of raw) {
+    const codePoint = character.codePointAt(0) ?? 0
+    bytes += codePoint <= 0x7f ? 1 : codePoint <= 0x7ff ? 2 : codePoint <= 0xffff ? 3 : 4
+  }
+  return bytes
 }

@@ -40,7 +40,7 @@ export { MAX_SERIALIZED_BYTES } from './records.ts'
 export type { ReviewPatch, ReviewRecord, ReviewStatus } from './records.ts'
 export { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
 export { matchesQueueFilter, sortQueue } from './queue.ts'
-export { countQueue, statusForPair } from './queue.ts'
+export { countQueue, recordForPair, statusForPair } from './queue.ts'
 export {
   createReviewRecord,
   mergeReviewRecords,

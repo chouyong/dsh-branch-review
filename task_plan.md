@@ -4,7 +4,7 @@
 在 `D:\knowledgeBase\dsh-branch-review` 完成一个把真实 DSH 会话分支比较转化为可追踪人工决策队列的插件，并以可复核的构建、安装、真实浏览器交互、截图、Git 历史和 Claude 独立审核证据收口。
 
 ## Current Phase
-Phase 1
+Phase 6
 
 ## Phases
 
@@ -38,8 +38,8 @@ Phase 1
 - [x] 核验 ModuleLoader 包装、externals 与无第二份 React
 - [x] 先尝试文档化安装并保留首次结果分类
 - [x] 验证可复核 tarball 构件与 SHA-256
-- [ ] 每个里程碑形成真实、功能性、可审阅提交
-- **Status:** in_progress
+- [x] 每个里程碑形成真实、功能性、可审阅提交
+- **Status:** complete
 
 ### Phase 5: Stage 2-3 Real Runtime Gate
 - [x] 使用 D 盘 profile 启动真实 DSH
@@ -53,15 +53,17 @@ Phase 1
 ### Phase 6: Stage 4 Evidence and Claude Review
 - [x] 只用已验证事实完成 README、release report 和安装材料
 - [x] 固化源码、构件、运行态与截图身份
-- [ ] 创建 R1 通知并先执行 Claude dry-run
+- [x] 保留 R1/R1A 通知与回执，并记录 R1A HOLD
+- [ ] 创建 R2 通知并先执行 Claude dry-run
 - [ ] 运行唯一只读 Claude 审核链并校验独立回执
 - [ ] 对 GO 独立复查；对 HOLD 保留 R1 并以新 R2 收口
-- **Status:** pending (Claude waits until uninstall proof and commit)
+- **Status:** in_progress (R1A 修复已验证，待提交后执行 R2)
 
 ### Phase 7: Publication Eligibility and Handoff
 - [x] 核验 GitHub owner、visibility、远端与真实 `created_at`
-- [ ] 核验产品仓真实功能提交数至少 10
-- [ ] 核验 Stage 0→3、截图、安装源和最终 Claude GO
+- [x] 核验产品仓真实功能提交数至少 10
+- [x] 核验 Stage 0→3、截图、安装源和文档事实
+- [ ] 核验最终 Claude GO
 - [ ] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
 - [ ] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
 - **Status:** pending
@@ -98,6 +100,7 @@ Phase 1
 | 存储补强补丁首次上下文匹配失败，未写入任何文件 | 1 | 读取精确片段后拆成小补丁成功应用；未重复原失败大补丁 |
 | 文档大补丁因 README 代码块漏写 `+` 而被 apply_patch 拒绝 | 1 | 未产生部分写入；拆分为 README 与架构两个小补丁并重新应用 |
 | 官方 DSH 安装首次在受限 shell 创建 profile `_tmp_*` 时返回 `EPERM` | 1 | 保留失败类别；按环境规则对同一官方命令请求受控提升，第二次安装成功 |
+| 递归 UTF-8 扫描包含生成的 `graphify-out` 后超过 20 秒超时 | 1 | 保留超时证据；改用精确变更文件列表扫描并通过 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。
