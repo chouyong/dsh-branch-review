@@ -11,11 +11,11 @@ Phase 1
 ### Phase 1: Rules, Preflight, and Stage 0
 - [x] 完整读取 `docs/CODEX_START_PROMPT.md`
 - [x] 读取并启用三项必需技能
-- [ ] 检查适用的 `AGENTS.md` / `CLAUDE.md` 与现有工作树
-- [ ] 初始化或核验 CodeGraph，再完成三个只读事实源的结构调查
-- [ ] 预注册仓库、运行时、安装、秘密边界和 UI 行为证据
-- [ ] 记录竞品检索事实及所有 Stage 0 结论
-- **Status:** in_progress
+- [x] 检查适用的 `AGENTS.md` / `CLAUDE.md` 与现有工作树
+- [x] 初始化或核验 CodeGraph，再完成三个只读事实源的结构调查
+- [x] 预注册仓库、运行时、安装、秘密边界和 UI 行为证据
+- [x] 记录竞品检索事实及所有 Stage 0 结论
+- **Status:** complete
 
 ### Phase 2: Project and Domain Core
 - [ ] 建立真实包版本、构建脚手架与窄类型契约
@@ -23,7 +23,7 @@ Phase 1
 - [ ] 实现真实 parent/child/sibling eligibility
 - [ ] 实现筛选、排序、序列化和导入纯函数
 - [ ] 对应最小验证与原子提交
-- **Status:** pending
+- **Status:** in_progress
 
 ### Phase 3: Storage, Queue, and UI
 - [ ] 实现可迁移、可导出、可卸载的浏览器存储
@@ -88,6 +88,9 @@ Phase 1
 | 首次 `git diff --cached --check` 报 `.gitignore` 与启动文档存在 EOF 空白行 | 1 | 提交前门禁成功拦截；去掉精确空行并添加 `.gitattributes` 固定 LF，重新暂存验证 |
 | 首次 GitHub 仓库探针错误使用 owner `zhouy`，并使并行批次提前失败 | 1 | 不重复错误路径；独立调用 `gh api user` 确认 owner 为 `chouyong`，后续使用精确路径并分离负向探针 |
 | 暂存 `git diff --cached --check` 报 `docs/publication-eligibility.md` 存在 EOF 空白行 | 1 | 提交前门禁成功拦截；去掉精确空行后重新暂存验证 |
+| 推送后 Git 复核遇到 Windows `dubious ownership`，并且 `git ls-remote` signal pipe 权限失败 | 1 | 保留失败证据；不重复原命令，改用精确 `git -c safe.directory=...` 和 GitHub API SHA 回读 |
+| scoped 复核发现 goal/hook 新增未跟踪根部投影文件 | 1 | 不清理、不提交；先读取新出现的 `AGENTS.md` / `CLAUDE.md` 并将其视为当前编辑规则 |
+| 第二提交暂存命令误写 `docs/findings.md`，该路径不存在 | 1 | 没有文件被暂存；改用准确的 `docs/`、根 `findings.md`、`progress.md`、`task_plan.md` 路径 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。

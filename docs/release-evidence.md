@@ -13,9 +13,9 @@
 - Repository: `dsh-branch-review`
 - Absolute path: `D:\knowledgeBase\dsh-branch-review`
 - Initial Git state: 2026-08-16 首次预检时不是 Git 仓库；随后按启动文档授权初始化本地 `main`
-- Source commit: 尚无提交
-- Dirty worktree: 启动文档、规划文件和本证据契约均为待提交新文件；`.codegraph/` 是忽略的本地生成索引
-- Remotes: 尚未配置
+- Source commit: `fd010c4` (`chore: establish branch review project contract`)
+- Dirty worktree: 首个提交后需用 scoped Git 复核；`.codegraph/` 是忽略的本地生成索引
+- Remotes: `origin=https://github.com/chouyong/dsh-branch-review.git`
 - Plugin package/version: 待实现
 - Artifact SHA-256: 待 Stage 1 构建
 - DSH source/executable: 待核验
@@ -45,12 +45,12 @@
 
 ### Stage 0 Required Source Questions
 
-- [ ] 当前可安装 DSH 版本真实提供的 UI slot
-- [ ] `SessionListState.id/parentId` 与 Host/sidebar `sessionId/parentSessionId` 的区别
-- [ ] `ISessions.list`、`ISessions.open(id)` 与浏览器存储的可用性和卸载边界
-- [ ] 删除、标题变化、损坏/旧记录、跨血缘导入与未知 schemaVersion 的处理
-- [ ] `localStorage`、IndexedDB 或只读 Host 桥接的选择依据
-- [ ] 发布当日 branch review / session decision / fork annotation 竞品事实
+- [x] 当前可安装 DSH 版本真实提供的 UI slot：`conversation.session.header.actions`；`.utilities` 仅见主干
+- [x] `SessionListState.id/parentId` 与 Host/sidebar `sessionId/parentSessionId` 的区别
+- [x] `ISessions.list`、`ISessions.open(id)` 与浏览器存储的可用性和卸载边界
+- [x] 删除、标题变化、损坏/旧记录、跨血缘导入与未知 schemaVersion 的处理策略
+- [x] `localStorage`、IndexedDB 或只读 Host 桥接的选择依据：本插件 namespace localStorage + strict envelope
+- [x] 发布当日 branch review / session decision / fork annotation 竞品检索事实
 
 ## Stage 1: Build and Install
 

@@ -3,7 +3,7 @@
 ## Session: 2026-08-16
 
 ### Phase 1: Rules, Preflight, and Stage 0
-- **Status:** in_progress
+- **Status:** complete
 - **Started:** 2026-08-16
 - Actions taken:
   - 完整读取 `docs/CODEX_START_PROMPT.md`。
@@ -20,6 +20,11 @@
   - 经 GitHub API 确认当前登录 owner 为 `chouyong`；认证输出中的 token 已遮罩，没有秘密值写入证据。
   - 经用户明确选择 public 后创建 `https://github.com/chouyong/dsh-branch-review`，并从 GitHub API 回读 `created_at=2026-08-16T11:35:26Z`、`eligible_after=2026-08-17T11:35:26Z`。
   - 创建唯一发布资格台账 `docs/publication-eligibility.md`；状态固定为 `WAITING_ELIGIBILITY`，直到 24 小时、10 个真实提交、Stage 0→3、截图/安装源和 Claude GO 全部满足。
+  - 首个提交以普通快进推送到 `origin/main` 成功；随后复核批次因 Windows Git `dubious ownership` 与 `git ls-remote` signal-pipe 权限错误中断，未据此否定已推送状态。
+  - 用 scoped `git -c safe.directory=...` 与 GitHub API ref 回读，确认本地 HEAD 与远端 `main` 同为 `fd010c4`。
+  - 复核时发现 goal/hook 产生的未跟踪根部投影文件；决定保留、不清理、不纳入产品提交，并先读取其规则。
+  - 三个只读事实源的 CodeGraph 索引均健康并可查询。
+  - 完成 Stage 0 结构调查：发布 slot、SessionListState/Host 字段、ISessions、localStorage 持久化边界、删除/损坏/未知版本策略和竞品事实均写入 `findings.md`。
 - Files created/modified:
   - `task_plan.md` (created)
   - `findings.md` (created)
@@ -29,7 +34,14 @@
   - `docs/publication-eligibility.md` (created)
 
 ### Phase 2: Project and Domain Core
-- **Status:** pending
+- **Status:** in_progress
+- **Started:** 2026-08-16
+- Actions taken:
+  - 采用版本化 localStorage envelope 与纯函数核心边界，准备创建真实包脚手架。
+- Files created/modified:
+  - `findings.md` (updated with Stage 0 evidence)
+  - `docs/release-evidence.md` (Stage 0 closed)
+  - `task_plan.md` (Phase 1 complete, Phase 2 in progress)
 
 ### Phase 3: Storage, Queue, and UI
 - **Status:** pending
@@ -60,6 +72,9 @@
 | 2026-08-16 | First staged diff check found extra blank lines at EOF in `.gitignore` and `docs/CODEX_START_PROMPT.md` | 1 | Removed only the extra blank lines, added LF policy, and scheduled a fresh staged validation before commit |
 | 2026-08-16 | Initial GitHub repository probe used incorrect inferred owner `zhouy`, and its expected nonexistence aborted the parallel result batch | 1 | Did not repeat the wrong path; queried `gh api user` separately and established `chouyong` as the authoritative owner |
 | 2026-08-16 | Staged UTF-8 passed but `git diff --cached --check` found an EOF blank line in `docs/publication-eligibility.md` | 1 | Removed only the extra blank line and scheduled a fresh staged validation before commit |
+| 2026-08-16 | Post-push Git verification hit `detected dubious ownership`; `git ls-remote` also failed creating a signal pipe | 1 | Preserved the errors, avoided the same commands, and switched to scoped `safe.directory` reads plus GitHub API ref verification |
+| 2026-08-16 | Scoped verification showed hook-projected untracked root files and directories | 1 | Preserved all user/runtime files, did not stage them, and scheduled a rule read before further edits |
+| 2026-08-16 | Second-commit staging used nonexistent `docs/findings.md` | 1 | No files staged; corrected the command to stage `docs/` plus root planning files explicitly |
 
 ## 5-Question Reboot Check
 | Question | Answer |
