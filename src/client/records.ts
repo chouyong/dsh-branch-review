@@ -1,4 +1,5 @@
 export const REVIEW_SCHEMA_VERSION = 1 as const
+export const MAX_SERIALIZED_BYTES = 512_000
 
 export const REVIEW_STATUSES = [
   'unresolved',
@@ -33,7 +34,7 @@ export interface ReviewRecordInput {
 
 export type ReviewPatch = Partial<Pick<ReviewRecord, 'status' | 'reason' | 'tags' | 'externalLinks'>>
 
-export type ParseRecordsError = 'invalid-json' | 'invalid-envelope' | 'unsupported-schema' | 'invalid-record'
+export type ParseRecordsError = 'invalid-json' | 'invalid-envelope' | 'unsupported-schema' | 'invalid-record' | 'payload-too-large'
 
 export type ParseRecordsResult =
   | { readonly ok: true; readonly records: readonly ReviewRecord[] }
@@ -179,6 +180,8 @@ export function serializeReviewRecords(records: readonly ReviewRecord[]): string
 }
 
 export function parseReviewRecords(raw: string): ParseRecordsResult {
+  const bytes = typeof TextEncoder === 'undefined' ? raw.length : new TextEncoder().encode(raw).byteLength
+  if (bytes > MAX_SERIALIZED_BYTES) return { ok: false, error: 'payload-too-large' }
   let parsed: unknown
   try {
     parsed = JSON.parse(raw)

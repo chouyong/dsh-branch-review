@@ -32,4 +32,9 @@ describe('review records', () => {
     expect(parseReviewRecords(JSON.stringify({ schemaVersion: 9, records: [] }))).toEqual({ ok: false, error: 'unsupported-schema' })
     expect(parseReviewRecords(JSON.stringify({ schemaVersion: 1, records: [{ schemaVersion: 1 }] }))).toEqual({ ok: false, error: 'invalid-record' })
   })
+
+  it('rejects oversized serialized payloads before parsing', () => {
+    const raw = JSON.stringify({ schemaVersion: 1, records: [], padding: 'x'.repeat(520_000) })
+    expect(parseReviewRecords(raw)).toEqual({ ok: false, error: 'payload-too-large' })
+  })
 })
