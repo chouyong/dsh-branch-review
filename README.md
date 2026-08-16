@@ -12,6 +12,7 @@
 - 版本化 `ReviewRecord`：稳定记录 ID、左右 session ID、人工状态、短理由、标签、外部链接、创建/更新时间和 schemaVersion。
 - 记录失去会话后保留并显示 orphaned；不会静默删除历史决策。
 - 队列支持全部、未评审、已决策、待跟进和 orphaned 筛选，按最近更新时间排序。
+- 面板摘要显示全部、未评审、已决策、待跟进和 orphaned 数量，帮助人工复核快速判断队列范围。
 - 显式导出/导入 JSON；导出只包含评审元数据，不打包 session 正文、工具参数或隐藏运行态。
 - localStorage envelope 有 schema 迁移、未知版本拒绝、损坏恢复、重复合并、容量失败保留内存快照和跨标签更新。
 - 支持键盘 Escape、焦点恢复、桌面和 390px 移动布局；样式、slot、监听器和存储订阅均有 disposer。

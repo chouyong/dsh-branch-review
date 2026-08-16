@@ -35,9 +35,11 @@ export function apply(ctx: Context): void {
 export type { DecisionQueueProps } from './DecisionQueue.tsx'
 export type { CandidateRelation, ReviewCandidate } from './lineage.ts'
 export type { QueueFilter } from './queue.ts'
+export type { QueueCounts } from './queue.ts'
 export type { ReviewPatch, ReviewRecord, ReviewStatus } from './records.ts'
 export { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
 export { matchesQueueFilter, sortQueue } from './queue.ts'
+export { countQueue } from './queue.ts'
 export {
   createReviewRecord,
   mergeReviewRecords,

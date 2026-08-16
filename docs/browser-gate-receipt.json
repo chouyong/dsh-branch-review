@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-16T12:43:50.840Z",
+  "generatedAt": "2026-08-16T12:49:38.833Z",
   "git": {
-    "head": "b450647bfa201d4b49dc18a22923bf36dae50524",
+    "head": "64f9435545ffa97bf18f70fc1e1180b9a6f5ac9a",
     "dirty": true,
-    "statusSha256": "214C3A3C8A504E2635D92BA6AC89F458DAE9208EF2BA3ECE16D1DF0D3F9F5AF2",
-    "trackedDiffSha256": "48E1C830737C0D59F477488A19FFEF887552E8E9B0B81E7B772DFFB43E334FE1"
+    "statusSha256": "0CDEFD8322B178863EF40EA0C04AA8EA50D6EECDD17C092020F380E373004B22",
+    "trackedDiffSha256": "A1EE0C35C9FE01777CA009B1A6F4E249925BC9C71DD965670A985894699E99C9"
   },
   "dsh": {
     "version": "0.1.0-rc.5",
@@ -17,12 +17,12 @@
     "headless": true
   },
   "plugin": {
-    "assetUrl": "http://127.0.0.1:3091/plugins/dsh-branch-review/client.js?rev=8961c4c9cef6",
+    "assetUrl": "http://127.0.0.1:3091/plugins/dsh-branch-review/client.js?rev=e96374e55e0f",
     "assetStatus": 200,
-    "bytes": 34438,
+    "bytes": 36373,
     "localBundlePath": "D:\\knowledgeBase\\dsh-branch-review\\lib\\client.js",
-    "localBundleSha256": "6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493",
-    "servedBundleSha256": "6192A6EB01F243C2EF34EEC55E560562E67377238B565DBF9535F1E61CB0C493"
+    "localBundleSha256": "D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C",
+    "servedBundleSha256": "D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C"
   },
   "viewport": {
     "desktop": {
@@ -65,25 +65,25 @@
       "path": "D:\\knowledgeBase\\dsh-branch-review\\assets\\branch-review-desktop.png",
       "width": 1440,
       "height": 1000,
-      "sha256": "6FFFFDBDAC1D4D45618FA890774EBB9DCCD87BCD1817B423EE26533C067E16B5"
+      "sha256": "1335AA584E440F9E2A07178A96421169FBF058934F46A94F6E4D9AF167D319C2"
     },
     "decisions": {
       "path": "D:\\knowledgeBase\\dsh-branch-review\\assets\\branch-review-decisions.png",
       "width": 1440,
       "height": 1000,
-      "sha256": "E6221A75A0D997E87F50B492AB24458CFE53F3D7229D2F331B0AFBD4ED002677"
+      "sha256": "50319E01CBB1D5B155878C345490A8239A758247C0233734A69727B83F1C1893"
     },
     "mobile": {
       "path": "D:\\knowledgeBase\\dsh-branch-review\\assets\\branch-review-mobile.png",
       "width": 390,
       "height": 844,
-      "sha256": "EA57B21313C049B4BAC7F8BB29489938F24195D0A73A22846728D1625E6078BD"
+      "sha256": "84D93EB00180FB98552B1E39325AA193EAC567BE70DF54E1CD9D2E4A2E64E4D0"
     }
   },
   "gif": {
     "path": "D:\\knowledgeBase\\dsh-branch-review\\assets\\branch-review-flow.gif",
     "frames": 3,
-    "sha256": "D0A00DD3DBCE76D9B1D6BB7FD4B55CEDD79D9B22DF7CCBAEAA4596A35418C287"
+    "sha256": "30305D8D4B6EE685354848A2CF05407EEEF5B8565EC71B84AA410DE91751A298"
   },
   "errors": {
     "console": [],

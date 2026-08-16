@@ -104,6 +104,11 @@
 - Tarball `dsh-branch-review-0.1.0.tgz` SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`.
 - Separate remove/restart contribution proof passed: after official CLI removal the restarted profile had no plugin asset, style, or trigger; official link install restored the plugin and final browser gate passed again. Remaining gate: create the next real functional commit, then Claude dry-run and independent review.
 
+### Queue Summary Enhancement: 2026-08-16
+- Added pure `countQueue()` aggregation and visible panel summary for all/unresolved/resolved/follow-up/orphaned buckets.
+- Added regression coverage for mixed status + orphaned counts; `npm run verify` passes with 10 tests.
+- Rebuilt browser bundle (36,373 bytes; SHA-256 `D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C`) and reran the real gate; receipt `2026-08-16T12:49:38.833Z` remains zero-error.
+
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|

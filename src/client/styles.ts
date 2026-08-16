@@ -15,6 +15,7 @@ const STYLESHEET = `
 .${CSS_PREFIX}__close { width: 28px; height: 28px; border-radius: 6px; background: transparent; }
 .${CSS_PREFIX}__filters { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin: 12px 0; }
 .${CSS_PREFIX}__select, .${CSS_PREFIX}__input { min-height: 32px; min-width: 0; padding: 5px 8px; border: 1px solid var(--dsw-alias-border-l2, rgba(127,127,127,.3)); border-radius: 6px; background: var(--dsw-alias-bg-layer-1, #fff); color: inherit; font: inherit; }
+.${CSS_PREFIX}__summary { display: flex; flex-wrap: wrap; gap: 5px 9px; margin: 0 0 10px; color: var(--dsw-alias-label-tertiary, #8b919b); font-size: 11px; }
 .${CSS_PREFIX}__queue { display: grid; gap: 6px; margin-bottom: 12px; }
 .${CSS_PREFIX}__queue-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 7px 8px; border: 1px solid var(--dsw-alias-border-l3, rgba(127,127,127,.16)); border-radius: 6px; background: transparent; text-align: left; }
 .${CSS_PREFIX}__queue-item--selected { border-color: var(--dsw-alias-state-business-primary, #4d6bfe); }

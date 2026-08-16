@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'reac
 import type { SessionId, SessionListState } from './contract.ts'
 import { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
 import { REVIEW_STATUSES, type ReviewStatus } from './records.ts'
-import { sortQueue, type QueueFilter } from './queue.ts'
+import { countQueue, sortQueue, type QueueFilter } from './queue.ts'
 import { ReviewStore } from './storage.ts'
 import { CSS_PREFIX } from './styles-prefix.ts'
 
@@ -13,7 +13,7 @@ export interface DecisionQueueProps {
   readonly useSessionList: SessionListSelector
   readonly open: (id: SessionId) => void
   readonly store: ReviewStore
-  readonly t: (key: 'trigger' | 'title' | 'candidate' | 'status' | 'reason' | 'tags' | 'links' | 'save' | 'open' | 'export' | 'import' | 'all' | 'unresolved' | 'resolved' | 'followUp' | 'orphaned' | 'noCandidate' | 'noRecord' | 'noQueue' | 'degraded' | 'invalidImport' | 'storageError' | 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus') => string
+  readonly t: (key: 'trigger' | 'title' | 'candidate' | 'status' | 'reason' | 'tags' | 'links' | 'save' | 'open' | 'export' | 'import' | 'all' | 'unresolved' | 'resolved' | 'followUp' | 'orphaned' | 'noCandidate' | 'noRecord' | 'noQueue' | 'degraded' | 'invalidImport' | 'storageError' | 'summary' | 'summaryAll' | 'summaryUnresolved' | 'summaryResolved' | 'summaryFollowUp' | 'summaryOrphaned' | 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus') => string
 }
 
 type StatusMessageKey = 'unresolvedStatus' | 'keepLeft' | 'keepRight' | 'keepBoth' | 'discardBoth' | 'followUpStatus'
@@ -64,6 +64,7 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
     ? undefined
     : snapshot.records.find(record => record.leftSessionId === sessionId && record.rightSessionId === selectedCandidate.id)
   const visibleRecords = sortQueue(snapshot.records, listState, filter)
+  const counts = countQueue(snapshot.records, listState)
   const hasTrigger = candidates.length > 0 || currentRecords.length > 0
 
   useEffect(() => {
@@ -173,6 +174,13 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
                 {FILTERS.map(value => <option key={value} value={value}>{value === 'follow-up' ? t('followUp') : t(value)}</option>)}
               </select>
             </label>
+          </div>
+          <div className={`${CSS_PREFIX}__summary`} aria-label={t('summary')}>
+            <span>{t('summaryAll')}: {counts.all}</span>
+            <span>{t('summaryUnresolved')}: {counts.unresolved}</span>
+            <span>{t('summaryResolved')}: {counts.resolved}</span>
+            <span>{t('summaryFollowUp')}: {counts.followUp}</span>
+            <span>{t('summaryOrphaned')}: {counts.orphaned}</span>
           </div>
           <div className={`${CSS_PREFIX}__queue`} aria-label="Review records">
             {visibleRecords.length === 0 ? <div className={`${CSS_PREFIX}__empty`}>{t('noQueue')}</div> : visibleRecords.map(record => {
