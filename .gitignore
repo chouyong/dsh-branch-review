@@ -1,6 +1,7 @@
 .codegraph/
 node_modules/
 dist/
+lib/
 coverage/
 *.tgz
 *.log

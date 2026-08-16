@@ -1,0 +1,4 @@
+# Mount the installed package by name so DSH discovers its Node and browser halves.
+- insert:
+    - id: branch-review
+      name: dsh-branch-review

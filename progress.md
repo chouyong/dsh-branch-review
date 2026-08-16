@@ -75,6 +75,11 @@
 | 2026-08-16 | Post-push Git verification hit `detected dubious ownership`; `git ls-remote` also failed creating a signal pipe | 1 | Preserved the errors, avoided the same commands, and switched to scoped `safe.directory` reads plus GitHub API ref verification |
 | 2026-08-16 | Scoped verification showed hook-projected untracked root files and directories | 1 | Preserved all user/runtime files, did not stage them, and scheduled a rule read before further edits |
 | 2026-08-16 | Second-commit staging used nonexistent `docs/findings.md` | 1 | No files staged; corrected the command to stage `docs/` plus root planning files explicitly |
+| 2026-08-16 | First `npm run typecheck` found unused imports and an exact-optional readonly fixture error | 1 | Removed unused types and narrowed the fixture entry before spreading; rerun is pending |
+| 2026-08-16 | First `npm test` failed one schema-0 migration test; `vite-node -e` was unsupported and attempted an undeclared package install | 1 | Used native Node strip-types to inspect pure-function results, found legacy item-version guard, and patched it |
+| 2026-08-16 | First bundle contract check assumed single-quoted require calls and failed on the built artifact's double quotes | 1 | Kept the artifact unchanged, widened the checker to quote-preserving regexes, and added `lib/` to ignored outputs |
+| 2026-08-16 | First storage hardening patch did not match the exact event-handler context | 1 | No files changed; read the current fragment and applied smaller storage/UI/test patches |
+| 2026-08-16 | Documentation patch was rejected because one README code-block line lacked the patch `+` marker | 1 | No partial write; split documentation into two smaller patches |
 
 ## 5-Question Reboot Check
 | Question | Answer |

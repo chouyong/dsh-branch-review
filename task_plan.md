@@ -91,6 +91,11 @@ Phase 1
 | 推送后 Git 复核遇到 Windows `dubious ownership`，并且 `git ls-remote` signal pipe 权限失败 | 1 | 保留失败证据；不重复原命令，改用精确 `git -c safe.directory=...` 和 GitHub API SHA 回读 |
 | scoped 复核发现 goal/hook 新增未跟踪根部投影文件 | 1 | 不清理、不提交；先读取新出现的 `AGENTS.md` / `CLAUDE.md` 并将其视为当前编辑规则 |
 | 第二提交暂存命令误写 `docs/findings.md`，该路径不存在 | 1 | 没有文件被暂存；改用准确的 `docs/`、根 `findings.md`、`progress.md`、`task_plan.md` 路径 |
+| 首次 `npm run typecheck` 报两个未使用导入和一个 readonly fixture 展开类型错误 | 1 | 删除未使用类型、先窄化 fixture 行再展开；不重复未修复的失败命令 |
+| 首次 `npm test` 迁移用例失败；辅助 `vite-node -e` 不支持该 CLI 选项并触发未声明安装尝试 | 1 | 定位到 schema-0 记录项缺省版本被错误拒绝；改用原生 Node strip-types 定位并修复迁移条件 |
+| 首次 `npm run test:bundle` 只匹配单引号 require，未识别实际双引号产物 | 1 | 产物本身已构建成功；检查器改为带反向引用的单双引号正则，并忽略生成的 `lib/` |
+| 存储补强补丁首次上下文匹配失败，未写入任何文件 | 1 | 读取精确片段后拆成小补丁成功应用；未重复原失败大补丁 |
+| 文档大补丁因 README 代码块漏写 `+` 而被 apply_patch 拒绝 | 1 | 未产生部分写入；拆分为 README 与架构两个小补丁并重新应用 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。

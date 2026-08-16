@@ -1,0 +1,24 @@
+import { describe, expect, it } from 'vitest'
+import { SessionId, type SessionListState } from '../src/client/contract.ts'
+import { createReviewRecord } from '../src/client/records.ts'
+import { matchesQueueFilter, sortQueue } from '../src/client/queue.ts'
+
+const list: SessionListState = {
+  ids: [SessionId('left'), SessionId('right')],
+  byId: {
+    left: { id: SessionId('left'), displayTitle: 'Left', running: false, blank: false, updatedAt: 1 },
+    right: { id: SessionId('right'), displayTitle: 'Right', running: false, blank: false, updatedAt: 1 },
+  },
+  current: SessionId('left'),
+}
+
+describe('review queue', () => {
+  it('filters status groups and sorts newest first', () => {
+    const unresolved = createReviewRecord({ leftSessionId: 'left', rightSessionId: 'right', now: 1, recordId: 'a' })
+    const resolved = { ...createReviewRecord({ leftSessionId: 'left', rightSessionId: 'other', now: 2, recordId: 'b' }), status: 'keep-left' as const, updatedAt: 4 }
+    expect(matchesQueueFilter(unresolved, list, 'unresolved')).toBe(true)
+    expect(matchesQueueFilter(resolved, list, 'resolved')).toBe(true)
+    expect(sortQueue([unresolved, resolved], list, 'all').map(record => record.recordId)).toEqual(['b', 'a'])
+    expect(matchesQueueFilter(resolved, list, 'orphaned')).toBe(true)
+  })
+})
