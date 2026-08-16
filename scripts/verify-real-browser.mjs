@@ -192,7 +192,7 @@ try {
   await chooseCandidate(dialog, candidates[2].value)
   await saveDecision(dialog, 'Follow up', 'Needs a human decision after the next verification run.', 'human-review', 'https://github.com/chouyong/dsh-branch-review/issues/3')
   const queueText = await dialog.locator('[aria-label="Review records"]').innerText()
-  invariant(queueText.includes('keep-left') && queueText.includes('keep-right') && queueText.includes('follow-up'), 'Three decision states are not visible in the queue')
+  invariant(queueText.includes('Keep left') && queueText.includes('Keep right') && queueText.includes('Follow up'), 'Three decision states are not visible in the queue')
 
   const download = await Promise.all([
     page.waitForEvent('download', { timeout: 5_000 }),
@@ -217,7 +217,7 @@ try {
   await openForkSession(page)
   const reopened = await openQueue(page)
   const persistedText = await reopened.dialog.locator('[aria-label="Review records"]').innerText()
-  invariant(persistedText.includes('keep-left') && persistedText.includes('keep-right') && persistedText.includes('follow-up'), 'Decision states did not persist after reload')
+  invariant(persistedText.includes('Keep left') && persistedText.includes('Keep right') && persistedText.includes('Follow up'), 'Decision states did not persist after reload')
 
   await reopened.dialog.locator('select').nth(1).selectOption('resolved')
   await page.waitForTimeout(150)

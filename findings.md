@@ -75,5 +75,5 @@
 - 公开 UI 通过 `分叉会话` 建立一个 parent 与两个 sibling；插件在标题栏显示 `Branch review`，候选为 1 parent + 2 sibling；新会话基线不显示入口。
 - 三种状态 `keep-left`、`keep-right`、`follow-up` 均真实保存；重载、resolved 筛选、Open session、Export metadata 和 Import metadata 通过；console/page/request failures 均为 0。
 - 桌面截图首次暴露宿主 header overflow 裁切面板左侧文字；将面板改为 viewport-fixed 后重新构建并重跑门禁，最终三图与 3-frame GIF 可读且无横向溢出。
-- 最终证据：`assets/branch-review-desktop.png` SHA-256 `1335AA584E440F9E2A07178A96421169FBF058934F46A94F6E4D9AF167D319C2`；`assets/branch-review-decisions.png` `50319E01CBB1D5B155878C345490A8239A758247C0233734A69727B83F1C1893`；`assets/branch-review-mobile.png` `84D93EB00180FB98552B1E39325AA193EAC567BE70DF54E1CD9D2E4A2E64E4D0`；`assets/branch-review-flow.gif` `30305D8D4B6EE685354848A2CF05407EEEF5B8565EC71B84AA410DE91751A298`。
+- 最终证据：`assets/branch-review-desktop.png` SHA-256 `9D71DA2D12DE452DAEB0FCDFA7AB03961ED9CD3D07E54886F87DC2FB2E9BED7C`；`assets/branch-review-decisions.png` `5E00A406CAD4F7032A599128B209BAF905A296412C51CC89803F747FBF9630BB`；`assets/branch-review-mobile.png` `2898C1E9653D49A896CCB53F59825DFC7244FBA22CB20ECED363A8B1765FF2E2`；`assets/branch-review-flow.gif` `09C211B9A10AFE1CD725945B1AD3E5947868D9D139655254AD892C32DF39E407`。
 - 机器回执为 `docs/browser-gate-receipt.json`；当前 local profile 未配置模型 API key，门禁未发送消息、未读取秘密，截图中的宿主错误不属于浏览器错误。

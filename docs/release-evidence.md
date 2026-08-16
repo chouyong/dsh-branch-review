@@ -17,7 +17,7 @@
 - Dirty worktree: 首个提交后需用 scoped Git 复核；`.codegraph/` 是忽略的本地生成索引
 - Remotes: `origin=https://github.com/chouyong/dsh-branch-review.git`
 - Plugin package/version: `dsh-branch-review@0.1.0`
-- Artifact SHA-256: tarball `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; browser bundle `D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C`
+- Artifact SHA-256: tarball `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; browser bundle `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
 - DSH source/executable: source `D:\knowledgeBase\deepseek-harness`, built CLI `D:\knowledgeBase\deepseek-harness\apps\cli\lib\bin.js`, version `0.1.0-rc.5`
 - Effective DSH home/profile: `D:\dsh-home` / `D:\dsh-home\profiles\web`; profile manifest contains `dsh-branch-review` as a link dependency and the existing read-only `dsh-fork-graph` fixture
 - Relay base URL/model discovery endpoint/web port: 待核验；不得记录秘密值
@@ -56,7 +56,7 @@
 
 - Dependency command and flags: `npm install --ignore-scripts --legacy-peer-deps`; added dev-only `playwright-core`, `pngjs`, `gif-encoder-2` for the browser gate
 - Typecheck: PASS (`npm run typecheck`)
-- Production build: PASS (`npm run build`); browser bundle 36,373 bytes
+- Production build: PASS (`npm run build`); browser bundle 37,890 bytes
 - Bundle contract: PASS (`npm run test:bundle`)
 - Full tests: PASS (`npm test`, 4 files / 9 tests)
 - Package contract: PASS (`npm run verify:package`)
@@ -64,12 +64,12 @@
 - Documented install attempt 1: failed, restricted shell `EPERM` while opening `D:\dsh-home\profiles\web\_tmp_*`; exact CLI category `pnpm failed in profile directory`
 - Documented install attempt 2: passed after controlled elevation; profile dependency is `dsh-branch-review link:D:/knowledgeBase/dsh-branch-review`, pnpm `11.7.0`, supply-chain lock verified
 - Tarball fallback: not used; official link install passed after environment permission correction
-- Artifact identity: `dsh-branch-review-0.1.0.tgz`, 21 files, SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; `lib/client.js` SHA-256 `D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C`
+- Artifact identity: `dsh-branch-review-0.1.0.tgz`, 21 files, SHA-256 `646938FF322075EAC5F39932A1823281315413B35FE5C0B2C49EFCF5D1AAACDC`; `lib/client.js` SHA-256 `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
 
 ## Stage 2: Runtime Load
 
 - Isolated D-drive profile/home: PASS for `D:\dsh-home\profiles\web`; link dependency and lockfile were re-read after install
-- Plugin client asset HTTP status: PASS, root and asset HTTP 200; served/local SHA-256 both `D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C`
+- Plugin client asset HTTP status: PASS, root and asset HTTP 200; served/local SHA-256 both `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`
 - Style node and slot presence: PASS, `#dsh-branch-review-style` count 1 and visible `Branch review` slot trigger
 - Console errors: PASS, 0
 - Page errors: PASS, 0
@@ -86,8 +86,8 @@
 - Desktop and 390px mobile results: PASS, no horizontal overflow; mobile panel bounded to 390x844
 - Genuine screenshot paths and capture attempt: PASS, `assets/branch-review-desktop.png`, `assets/branch-review-decisions.png`, `assets/branch-review-mobile.png`
 - Short GIF path and capture attempt: PASS, `assets/branch-review-flow.gif`, 3 real Edge frames
-- Browser receipt: `docs/browser-gate-receipt.json`, Edge `151.0.4129.86`, DSH `0.1.0-rc.5`, generated `2026-08-16T12:49:38.833Z`
-- Screenshot SHA-256: desktop `1335AA584E440F9E2A07178A96421169FBF058934F46A94F6E4D9AF167D319C2`; decisions `50319E01CBB1D5B155878C345490A8239A758247C0233734A69727B83F1C1893`; mobile `84D93EB00180FB98552B1E39325AA193EAC567BE70DF54E1CD9D2E4A2E64E4D0`; GIF `30305D8D4B6EE685354848A2CF05407EEEF5B8565EC71B84AA410DE91751A298`
+- Browser receipt: `docs/browser-gate-receipt.json`, Edge `151.0.4129.86`, DSH `0.1.0-rc.5`, generated `2026-08-16T13:00:59.573Z`
+- Screenshot SHA-256: desktop `9D71DA2D12DE452DAEB0FCDFA7AB03961ED9CD3D07E54886F87DC2FB2E9BED7C`; decisions `5E00A406CAD4F7032A599128B209BAF905A296412C51CC89803F747FBF9630BB`; mobile `2898C1E9653D49A896CCB53F59825DFC7244FBA22CB20ECED363A8B1765FF2E2`; GIF `09C211B9A10AFE1CD725945B1AD3E5947868D9D139655254AD892C32DF39E407`
 
 ## Stage 4: Publication
 

@@ -109,6 +109,10 @@
 - Added regression coverage for mixed status + orphaned counts; `npm run verify` passes with 10 tests.
 - Rebuilt browser bundle (36,373 bytes; SHA-256 `D61DF714D164AF3844725E1F7E6F03BC04382B4D67FC61F573CAD9DDE6A4A76C`) and reran the real gate; receipt `2026-08-16T12:49:38.833Z` remains zero-error.
 
+### Final 10-Commit Gate: 2026-08-16
+- Product history reached 10 real functional commits at `355a69d`; no empty/count-only commits were added.
+- Final browser gate after lineage scoping and humanized status labels passed at `2026-08-16T13:00:59.573Z`; served/local bundle SHA-256 `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`, candidate count 3, decision states 3, all browser error arrays empty.
+
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
