@@ -92,7 +92,7 @@
 ## Stage 4: Publication
 
 - Verified documentation claims: README now links only to generated local evidence and states that GitHub Release URL is not yet available
-- Commit history count and identities: 18 real functional/documentation commits are present through `064fa35`; R1A/R2 HOLD and R3 GO receipts are preserved as separate files
+- Commit history count and identities: at least 18 real functional/documentation commits are present; R1A/R2 HOLD and R3 GO receipts are preserved as separate files
 - GitHub owner/visibility/created_at/eligible_after: 以唯一台账 `docs/publication-eligibility.md` 为准
 - GitHub API `created_at` and `eligible_after`: see `docs/publication-eligibility.md` (created_at recorded; 24-hour window still open)
 - Claude review: R1 broad `NO_RESULT_TIMEOUT`, R1A `HOLD`, R2 `HOLD`, R3 `GO`; each notice/receipt is preserved and R3 is limited to the reverse-orientation/storage repair scope

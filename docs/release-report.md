@@ -35,4 +35,4 @@ Evidence files:
 
 ## Publication Hold
 
-GitHub repository creation was verified at `2026-08-16T11:35:26Z`; `eligible_after` is `2026-08-17T11:35:26Z`. The product history now has 18 real functional/documentation commits. Claude R1A and R2 returned `HOLD`; the distinct R3 receipt returned `FINAL_DECISION: GO` for the repair scope. Keep `docs/publication-eligibility.md` at `WAITING_ELIGIBILITY` until the 24-hour timestamp and target-list rules are independently rechecked; do not create a PR, merge automatically, or force-push.
+GitHub repository creation was verified at `2026-08-16T11:35:26Z`; `eligible_after` is `2026-08-17T11:35:26Z`. The product history has at least 18 real functional/documentation commits. Claude R1A and R2 returned `HOLD`; the distinct R3 receipt returned `FINAL_DECISION: GO` for the repair scope. Keep `docs/publication-eligibility.md` at `WAITING_ELIGIBILITY` until the 24-hour timestamp and target-list rules are independently rechecked; do not create a PR, merge automatically, or force-push.
