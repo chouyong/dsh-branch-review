@@ -56,15 +56,15 @@ Phase 6
 - [x] 保留 R1/R1A/R2 通知与回执，并记录 R1A/R2 HOLD
 - [x] 创建 R2 通知并执行 Claude dry-run 与唯一只读审核链
 - [x] 修复 R2 blocking finding 并完成最高信号验证
-- [ ] 创建 R3 通知并执行唯一只读审核链
-- [ ] 对 GO 独立复查；对 HOLD 保留历史回执并继续新轮次
-- **Status:** in_progress (R2 HOLD 已修复，待 R3)
+- [x] 创建 R3 通知并执行唯一只读审核链
+- [x] 对 GO 独立复查；对 HOLD 保留历史回执并继续新轮次
+- **Status:** complete (R3 GO；R1A/R2 历史 HOLD 保留)
 
 ### Phase 7: Publication Eligibility and Handoff
 - [x] 核验 GitHub owner、visibility、远端与真实 `created_at`
 - [x] 核验产品仓真实功能提交数至少 10
 - [x] 核验 Stage 0→3、截图、安装源和文档事实
-- [ ] 核验最终 Claude GO
+- [x] 核验最终 Claude GO
 - [ ] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
 - [ ] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
 - **Status:** pending

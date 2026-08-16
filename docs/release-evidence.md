@@ -4,7 +4,7 @@
 
 ## Outcome
 
-`PASS_AFTER_CHANGES` — 首次官方安装在受限 shell 因 profile 临时目录 `EPERM` 失败；受控提升后同一官方 link 安装成功。随后最新构建、真实 DSH Web、Edge 门禁、截图和 GIF 均通过。由于 GitHub 仓库尚未满 24 小时、真实功能提交尚未达到 10 个且 Claude 尚未审核，发布资格仍为 `WAITING_ELIGIBILITY`，禁止创建 PR。
+`PASS_AFTER_CHANGES` — 首次官方安装在受限 shell 因 profile 临时目录 `EPERM` 失败；受控提升后同一官方 link 安装成功。随后最新构建、真实 DSH Web、Edge 门禁、截图和 GIF 均通过；R1A/R2 HOLD 已修复，R3 独立只读审核为 `GO`。由于 GitHub 仓库尚未满 24 小时且目标列表规则尚未重读，发布资格仍为 `WAITING_ELIGIBILITY`，禁止创建 PR。
 
 ## Stage 0: Preflight
 
@@ -92,10 +92,10 @@
 ## Stage 4: Publication
 
 - Verified documentation claims: README now links only to generated local evidence and states that GitHub Release URL is not yet available
-- Commit history count and identities: 14 real functional/documentation commits are present through `0fba29e`; R2 remains a preserved HOLD receipt and R3 is required after this repair
+- Commit history count and identities: 17 real functional/documentation commits are present through `b1bb894`; R1A/R2 HOLD and R3 GO receipts are preserved as separate files
 - GitHub owner/visibility/created_at/eligible_after: 以唯一台账 `docs/publication-eligibility.md` 为准
 - GitHub API `created_at` and `eligible_after`: see `docs/publication-eligibility.md` (created_at recorded; 24-hour window still open)
-- Claude review: not started; now eligible to begin after this evidence and the next verification commit; must use dry-run then one read-only chain
+- Claude review: R1 broad `NO_RESULT_TIMEOUT`, R1A `HOLD`, R2 `HOLD`, R3 `GO`; each notice/receipt is preserved and R3 is limited to the reverse-orientation/storage repair scope
 - PR status: `WAITING_ELIGIBILITY`; creation is forbidden until all gates pass
 - Persistent goal: active; objective includes local Stage 0→4 closure while preserving all PR eligibility red lines
 

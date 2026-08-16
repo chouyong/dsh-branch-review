@@ -93,6 +93,12 @@
 - **New commit:** `0fba29e` (`fix: orient reverse decision controls`); latest browser receipt `2026-08-16T13:39:35.896Z`, bundle SHA-256 `576A793485160CF30BBCF0F0C29AF06CB1EAD611BAF883261C49B5A9A761B733`, zero console/page/request errors.
 - **Next:** preserve R2 HOLD, create R3 notice/receipt, run a new dry-run and one safe-mode read-only Claude chain; PR remains forbidden.
 
+### R3 Review Closeout: 2026-08-16
+- **R3 invocation:** dry-run passed; the single safe-mode Claude chain completed with exactly one final marker in `docs/CLAUDE_TO_CODEX_REVIEW_RECEIPT_R3.md`: `FINAL_DECISION: GO`.
+- **Independent Codex checks:** marker count is 1; `git diff --check a68be65..0fba29e` passed; `npm run verify` passed with 17 tests; no blocking finding remains in the reviewed repair scope.
+- **Residual non-blockers:** Claude recorded no UI test harness, untested StorageEvent/read-failed paths, and import-only recovery tradeoffs; these are documented risks, not a release or human approval.
+- **Publication state:** GitHub repository has 17 real commits but remains `WAITING_ELIGIBILITY` until `2026-08-17T11:35:26Z` and target-list rules are re-read; PR creation remains forbidden.
+
 ## Error Log
 | Timestamp | Error | Attempt | Resolution |
 |-----------|-------|---------|------------|
@@ -133,8 +139,8 @@
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|
-| Where am I? | Phase 6: R2 HOLD repaired; R3 Claude review is next |
-| Where am I going? | Commit evidence refresh → R3 read-only review → final eligibility recheck |
+| Where am I? | Phase 7: Stage 0→4 and R3 GO are closed |
+| Where am I going? | Wait for the exact GitHub eligibility timestamp, re-read target-list rules, and only then reassess PR eligibility |
 | What's the goal? | Deliver a verified DSH branch-review decision queue without violating privacy, lineage, or PR gates |
 | What have I learned? | See `findings.md` |
 | What have I done? | Verified the repair, refreshed CodeGraph and real browser evidence, and updated release ledgers |
