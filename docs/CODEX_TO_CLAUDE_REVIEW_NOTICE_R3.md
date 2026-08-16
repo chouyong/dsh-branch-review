@@ -6,13 +6,13 @@
 ## Review Scope
 
 - 项目根目录：`D:\knowledgeBase\dsh-branch-review`
-- 审核对象：代码提交 `a68be65..0fba29e` 中的 `src/client/DecisionQueue.tsx`、`src/client/records.ts`、`src/client/storage.ts` 与 `tests/records.spec.ts`、`tests/storage.spec.ts`；当前 `HEAD=34eb9d8` 的文档/证据提交只作为上下文，不审其内容
+- 审核对象：代码提交 `a68be65..0fba29e` 中的 `src/client/DecisionQueue.tsx`、`src/client/records.ts`、`src/client/storage.ts` 与 `tests/records.spec.ts`、`tests/storage.spec.ts`；当前 `HEAD=05290a1` 的文档/证据提交只作为上下文，不审其内容
 - 目标回执：`D:\knowledgeBase\dsh-branch-review\docs\CLAUDE_TO_CODEX_REVIEW_RECEIPT_R3.md`
 - 只审上述范围及其直接测试证据；范围外变化只记录，不顺手修改。
 
 ## Baseline
 
-- Git 基线：`a68be65`; 修复提交：`0fba29e` (`fix: orient reverse decision controls`); 当前 HEAD：`34eb9d8`
+- Git 基线：`a68be65`; 修复提交：`0fba29e` (`fix: orient reverse decision controls`); 当前 HEAD：`05290a1`
 - 当前状态：tracked worktree clean；未跟踪 `.claude/`、`.codex/`、`.meta-kim/`、根规则投影和 `graphify-out/` 属于运行时/审核证据，不在本轮审核对象
 - 修复提交已快进推送至 `origin/main`；禁止 Claude 执行任何 Git 写操作
 - 关键哈希：`lib/client.js` `576A793485160CF30BBCF0F0C29AF06CB1EAD611BAF883261C49B5A9A761B733`; browser receipt `docs/browser-gate-receipt.json` generated `2026-08-16T13:39:35.896Z`; tarball `47D8CA9DF4895DD7CB22D216691EAB0076AD1E32DE57EF873E943CABDDE158A9`
