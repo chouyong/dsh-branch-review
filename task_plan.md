@@ -65,7 +65,7 @@ Phase 6
 - [x] 核验产品仓真实功能提交数至少 10
 - [x] 核验 Stage 0→3、截图、安装源和文档事实
 - [x] 核验最终 Claude GO
-- [ ] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
+- [x] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
 - [ ] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
 - **Status:** in_progress (all technical gates and Claude R3 GO complete; waiting on GitHub eligibility timestamp)
 
@@ -102,6 +102,7 @@ Phase 6
 | 文档大补丁因 README 代码块漏写 `+` 而被 apply_patch 拒绝 | 1 | 未产生部分写入；拆分为 README 与架构两个小补丁并重新应用 |
 | 官方 DSH 安装首次在受限 shell 创建 profile `_tmp_*` 时返回 `EPERM` | 1 | 保留失败类别；按环境规则对同一官方命令请求受控提升，第二次安装成功 |
 | 递归 UTF-8 扫描包含生成的 `graphify-out` 后超过 20 秒超时 | 1 | 保留超时证据；改用精确变更文件列表扫描并通过 |
+| R3 closeout 后重复 GitHub commits API 读取遭到本机代理拒绝 | 1 | 保留此前成功的远端 SHA/仓库证据；不重复同一网络请求，资格仍按已记录时间戳失败关闭 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。
