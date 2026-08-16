@@ -16,7 +16,7 @@
 - 显式导出/导入 JSON；导出只包含评审元数据，不打包 session 正文、工具参数或隐藏运行态。
 - localStorage envelope 有 schema 迁移、未知版本拒绝、损坏恢复、重复合并、容量失败保留内存快照和跨标签更新。
 - 导入 JSON 在解析前限制为 512 KB，超限 payload 失败关闭，不覆盖现有记录。
-- 支持键盘 Escape、焦点恢复、桌面和 390px 移动布局；样式、slot、监听器和存储订阅均有 disposer。
+- 支持键盘 Escape、Ctrl/Cmd+Enter 保存、焦点恢复、桌面和 390px 移动布局；样式、slot、监听器和存储订阅均有 disposer。
 
 ## 安装
 

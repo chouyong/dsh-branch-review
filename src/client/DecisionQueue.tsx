@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import type { SessionId, SessionListState } from './contract.ts'
 import { findRelatedSessions, isRelatedPair, recordHealth } from './lineage.ts'
 import { REVIEW_STATUSES, type ReviewStatus } from './records.ts'
@@ -122,6 +122,13 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
     if (selectedRecord !== undefined) store.update(selectedRecord.recordId, { status }, now())
   }
 
+  const saveShortcut = (event: ReactKeyboardEvent<HTMLElement>): void => {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+      event.preventDefault()
+      saveDraft()
+    }
+  }
+
   const exportRecords = (): void => {
     const blob = new Blob([store.exportJson()], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -156,9 +163,9 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
         {t('trigger')}
       </button>
       {openPanel ? (
-        <section className={`${CSS_PREFIX}__panel`} role="dialog" aria-label={t('title')}>
+        <section className={`${CSS_PREFIX}__panel`} role="dialog" aria-labelledby={`${CSS_PREFIX}__title`} aria-modal="false" aria-keyshortcuts="Control+Enter Meta+Enter" onKeyDown={saveShortcut}>
           <div className={`${CSS_PREFIX}__heading`}>
-            <h2 className={`${CSS_PREFIX}__title`}>{t('title')}</h2>
+            <h2 id={`${CSS_PREFIX}__title`} className={`${CSS_PREFIX}__title`}>{t('title')}</h2>
             <button type="button" className={`${CSS_PREFIX}__close`} aria-label="Close" onClick={() => { setOpenPanel(false) }}>×</button>
           </div>
           <div className={`${CSS_PREFIX}__filters`}>
