@@ -40,4 +40,11 @@ describe('review queue', () => {
     expect(statusForPair([record], 'left', 'right')).toBe('keep-right')
     expect(statusForPair([], 'left', 'right')).toBeUndefined()
   })
+
+  it('scopes queue results and counts to the focused session', () => {
+    const focused = createReviewRecord({ leftSessionId: 'left', rightSessionId: 'right', now: 1, recordId: 'focused' })
+    const unrelated = createReviewRecord({ leftSessionId: 'other', rightSessionId: 'third', now: 2, recordId: 'unrelated' })
+    expect(sortQueue([focused, unrelated], list, 'all', 'left').map(record => record.recordId)).toEqual(['focused'])
+    expect(countQueue([focused, unrelated], list, 'left').all).toBe(1)
+  })
 })

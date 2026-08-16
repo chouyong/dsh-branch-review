@@ -63,8 +63,8 @@ export function DecisionQueue({ sessionId, useSessionList, open, store, t }: Dec
   const selectedRecord = selectedCandidate === undefined
     ? undefined
     : snapshot.records.find(record => record.leftSessionId === sessionId && record.rightSessionId === selectedCandidate.id)
-  const visibleRecords = sortQueue(snapshot.records, listState, filter)
-  const counts = countQueue(snapshot.records, listState)
+  const visibleRecords = sortQueue(snapshot.records, listState, filter, sessionId)
+  const counts = countQueue(snapshot.records, listState, sessionId)
   const hasTrigger = candidates.length > 0 || currentRecords.length > 0
 
   useEffect(() => {

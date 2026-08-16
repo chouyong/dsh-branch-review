@@ -39,8 +39,10 @@ export function sortQueue(
   records: readonly ReviewRecord[],
   state: Pick<SessionListState, 'byId'>,
   filter: QueueFilter,
+  focusSessionId?: string,
 ): readonly ReviewRecord[] {
   return records
+    .filter(record => focusSessionId === undefined || record.leftSessionId === focusSessionId || record.rightSessionId === focusSessionId)
     .filter(record => matchesQueueFilter(record, state, filter))
     .slice()
     .sort((left, right) => right.updatedAt - left.updatedAt || left.recordId.localeCompare(right.recordId))
@@ -49,9 +51,13 @@ export function sortQueue(
 export function countQueue(
   records: readonly ReviewRecord[],
   state: Pick<SessionListState, 'byId'>,
+  focusSessionId?: string,
 ): QueueCounts {
-  const counts = { all: records.length, unresolved: 0, resolved: 0, followUp: 0, orphaned: 0 }
-  for (const record of records) {
+  const scoped = focusSessionId === undefined
+    ? records
+    : records.filter(record => record.leftSessionId === focusSessionId || record.rightSessionId === focusSessionId)
+  const counts = { all: scoped.length, unresolved: 0, resolved: 0, followUp: 0, orphaned: 0 }
+  for (const record of scoped) {
     if (matchesQueueFilter(record, state, 'unresolved')) counts.unresolved += 1
     if (matchesQueueFilter(record, state, 'resolved')) counts.resolved += 1
     if (matchesQueueFilter(record, state, 'follow-up')) counts.followUp += 1
