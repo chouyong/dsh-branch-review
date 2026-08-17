@@ -136,6 +136,13 @@
 - Product history reached 10 real functional commits at `355a69d`; no empty/count-only commits were added.
 - Final browser gate after lineage scoping and humanized status labels passed at `2026-08-16T13:00:59.573Z`; served/local bundle SHA-256 `111989B4F8CB7589438B23A60D751F87B52F8B01D56C6519E9D47F8CF336E7E7`, candidate count 3, decision states 3, all browser error arrays empty.
 
+### Publication Eligibility Recheck: 2026-08-17
+- GitHub API re-read the repository identity: public `chouyong/dsh-branch-review`, `created_at=2026-08-16T11:35:26Z`; local time `2026-08-17T22:20:10+08:00` is after the 24-hour threshold.
+- GitHub API reports 22 commits on the product default branch; Claude R3 remains the sole final `GO` receipt.
+- Re-read both target contribution guides and refreshed each `upstream/main`; focused PR preparation is now allowed.
+- `awesome-dsh-plugin` commit `1f0b96b5` contains exactly one YAML entry, generated EN/ZH README lines, and two registered real screenshots; generator check and site build pass, while lint reports only 35 existing warnings.
+- `awesome-deepseek-harness` commit `19dbc4f` contains exactly the EN/ZH list entries. Full-repo lint still fails on the pre-existing upstream `vision_analyze` entry at current line 345; the new entry is at lines 251/252 and the focused diff passes whitespace checks.
+
 ## 5-Question Reboot Check
 | Question | Answer |
 |----------|--------|

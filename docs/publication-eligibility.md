@@ -14,18 +14,18 @@
 
 ## Eligibility Status
 
-`WAITING_ELIGIBILITY`
+`ELIGIBLE_FOR_PR`
 
-The repository is younger than 24 hours. PR creation is forbidden until the exact `eligible_after` time has passed and all independent gates below are also true.
+The exact `eligible_after` time has passed. PR creation is allowed because every independent gate below is also true.
 
 ## Required Conjunction Before Any PR
 
-- [ ] Current time is at or after `2026-08-17T11:35:26Z`, rechecked from GitHub API evidence
+- [x] Current time is at or after `2026-08-17T11:35:26Z` (local check `2026-08-17T22:20:10+08:00`; repository `created_at` re-read from GitHub API)
 - [x] Product repository has at least 10 real, functional, reviewable commits (10 commits on `main` at `355a69d`)
 - [x] Stage 0→3 real DSH gate passes with no unverified required behavior
 - [x] Genuine screenshots and short GIF are present and tied to the verified artifact/runtime
 - [x] Release/install source is reproducible and documentation claims are verified
 - [x] Claude final receipt has exactly one final marker: `FINAL_DECISION: GO` in distinct `docs/CLAUDE_TO_CODEX_REVIEW_RECEIPT_R3.md` (R1A/R2 HOLD receipts remain preserved)
-- [ ] Target list contribution rules and focused diff are re-read before any awesome-list PR
+- [x] Target list contribution rules and focused diff are re-read before any awesome-list PR
 
-Until every checkbox is independently proven, do not open a PR, merge automatically, force-push, or treat this waiting state as a blocker for continued local development.
+Do not merge automatically or force-push. Keep each awesome-list PR limited to its contribution entry and generated/list metadata.

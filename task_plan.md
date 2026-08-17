@@ -103,6 +103,8 @@ Phase 6
 | 官方 DSH 安装首次在受限 shell 创建 profile `_tmp_*` 时返回 `EPERM` | 1 | 保留失败类别；按环境规则对同一官方命令请求受控提升，第二次安装成功 |
 | 递归 UTF-8 扫描包含生成的 `graphify-out` 后超过 20 秒超时 | 1 | 保留超时证据；改用精确变更文件列表扫描并通过 |
 | R3 closeout 后重复 GitHub commits API 读取遭到本机代理拒绝 | 1 | 保留此前成功的远端 SHA/仓库证据；不重复同一网络请求，资格仍按已记录时间戳失败关闭 |
+| PR 分支并行复核遗漏 `git -C`，导致产品仓无法解析目标仓的 `upstream/main` | 1 | 命令未修改文件；改用显式目标仓路径和 scoped `safe.directory` 后通过 |
+| `awesome-deepseek-harness` 全仓 `awesome-lint` 在 `README.md:345` 报 `vision_analyze` 首字母小写 | 1 | 对照 `upstream/main` 确认为既有基线条目；本 PR 仅新增 251/252 行且 `diff --check` 通过，不修改无关条目 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。

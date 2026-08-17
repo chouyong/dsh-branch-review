@@ -77,3 +77,5 @@
 - 桌面截图首次暴露宿主 header overflow 裁切面板左侧文字；将面板改为 viewport-fixed 后重新构建并重跑门禁，最终三图与 3-frame GIF 可读且无横向溢出。
 - 最终证据：`assets/branch-review-desktop.png` SHA-256 `9D71DA2D12DE452DAEB0FCDFA7AB03961ED9CD3D07E54886F87DC2FB2E9BED7C`；`assets/branch-review-decisions.png` `5E00A406CAD4F7032A599128B209BAF905A296412C51CC89803F747FBF9630BB`；`assets/branch-review-mobile.png` `2898C1E9653D49A896CCB53F59825DFC7244FBA22CB20ECED363A8B1765FF2E2`；`assets/branch-review-flow.gif` `09C211B9A10AFE1CD725945B1AD3E5947868D9D139655254AD892C32DF39E407`。
 - 机器回执为 `docs/browser-gate-receipt.json`；当前 local profile 未配置模型 API key，门禁未发送消息、未读取秘密，截图中的宿主错误不属于浏览器错误。
+- 2026-08-17 资格复核：GitHub API 回读 `chouyong/dsh-branch-review` 为 public，`created_at=2026-08-16T11:35:26Z`；本地时间 `2026-08-17T22:20:10+08:00` 已晚于 `eligible_after=2026-08-17T11:35:26Z`，主干 API 返回 22 个提交。
+- 两个目标列表的最新 `upstream/main` 已刷新；贡献规则再次确认：`awesome-dsh-plugin` 以一个 YAML 为事实源并生成双语 README，截图注册可选；`awesome-deepseek-harness` 只需英文/中文条目、无截图、标题格式 `docs: add <repo>`。
