@@ -14,9 +14,9 @@
 
 ## Eligibility Status
 
-`ELIGIBLE_FOR_PR`
+`PRS_OPEN`
 
-The exact `eligible_after` time has passed. PR creation is allowed because every independent gate below is also true.
+The exact `eligible_after` time passed and every independent pre-PR gate was true. Two focused pull requests are now open.
 
 ## Required Conjunction Before Any PR
 
@@ -29,3 +29,8 @@ The exact `eligible_after` time has passed. PR creation is allowed because every
 - [x] Target list contribution rules and focused diff are re-read before any awesome-list PR
 
 Do not merge automatically or force-push. Keep each awesome-list PR limited to its contribution entry and generated/list metadata.
+
+## Open Pull Requests
+
+- `awesome-dsh-plugin/awesome-dsh-plugin#1449`: head `1f0b96b5b59fb82233c7057023ddd58439fcec34`; four allowed files; `PR check` passed. Submission gate run `32039307340` failed before evaluating the entry because the base repository's GitHub App API quota was exhausted; a fork contributor cannot rerun that workflow.
+- `0xsline/awesome-deepseek-harness#371`: head `19dbc4f58cbb3a861806f813ad8179f62257c9e4`; two allowed README files; the repository reports no pull-request checks.

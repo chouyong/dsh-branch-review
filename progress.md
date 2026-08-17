@@ -142,6 +142,10 @@
 - Re-read both target contribution guides and refreshed each `upstream/main`; focused PR preparation is now allowed.
 - `awesome-dsh-plugin` commit `1f0b96b5` contains exactly one YAML entry, generated EN/ZH README lines, and two registered real screenshots; generator check and site build pass, while lint reports only 35 existing warnings.
 - `awesome-deepseek-harness` commit `19dbc4f` contains exactly the EN/ZH list entries. Full-repo lint still fails on the pre-existing upstream `vision_analyze` entry at current line 345; the new entry is at lines 251/252 and the focused diff passes whitespace checks.
+- Corrected both isolated repositories' `origin` URLs from the read-only local `dsh-session-tree` reference repositories to the verified `chouyong` GitHub forks, then confirmed the target branch was absent and pushed without force.
+- Opened `awesome-dsh-plugin/awesome-dsh-plugin#1449` and `0xsline/awesome-deepseek-harness#371`; GitHub confirms the expected head SHAs, one commit per PR, and exact allowed file sets.
+- PR `#1449` normal `PR check` passed. Its downstream Submission gate run `32039307340` failed before submission evaluation because the base repository GitHub App exhausted its API rate limit; a scoped rerun attempt was rejected because only repository admins may rerun it.
+- PR `#371` reports no checks. Its only awesome-lint workflow is manual `workflow_dispatch`, so there is no pull-request test pipeline to await.
 
 ## 5-Question Reboot Check
 | Question | Answer |

@@ -79,3 +79,6 @@
 - 机器回执为 `docs/browser-gate-receipt.json`；当前 local profile 未配置模型 API key，门禁未发送消息、未读取秘密，截图中的宿主错误不属于浏览器错误。
 - 2026-08-17 资格复核：GitHub API 回读 `chouyong/dsh-branch-review` 为 public，`created_at=2026-08-16T11:35:26Z`；本地时间 `2026-08-17T22:20:10+08:00` 已晚于 `eligible_after=2026-08-17T11:35:26Z`，主干 API 返回 22 个提交。
 - 两个目标列表的最新 `upstream/main` 已刷新；贡献规则再次确认：`awesome-dsh-plugin` 以一个 YAML 为事实源并生成双语 README，截图注册可选；`awesome-deepseek-harness` 只需英文/中文条目、无截图、标题格式 `docs: add <repo>`。
+- 两个列表 PR 已创建：`awesome-dsh-plugin#1449`（head `1f0b96b5`，4 个允许文件）和 `awesome-deepseek-harness#371`（head `19dbc4f`，2 个 README）；两者均为单提交、普通推送、无强推。
+- `awesome-dsh-plugin#1449` 的 `PR check` 成功；后续 Submission gate run `32039307340` 在读取开放 PR 第 2 页时因维护方 GitHub App `core` 配额为 0 而失败，尚未进入条目年龄/提交数/manifest 校验。贡献者无管理员权限重跑，不能把该基础设施失败写成条目失败或门禁通过。
+- `awesome-deepseek-harness#371` 当前无 PR checks；其仓库只配置了手动 `workflow_dispatch` lint，贡献指南也明确 markdown 变更无需运行测试，本地 focused diff 是主要证据。

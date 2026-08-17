@@ -66,8 +66,8 @@ Phase 6
 - [x] 核验 Stage 0→3、截图、安装源和文档事实
 - [x] 核验最终 Claude GO
 - [x] 未满足全部条件时记录 `WAITING_ELIGIBILITY` 且禁止 PR
-- [ ] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
-- **Status:** in_progress (all technical gates and Claude R3 GO complete; waiting on GitHub eligibility timestamp)
+- [x] 满足全部条件后才准备聚焦 PR；禁止自动合并和强推
+- **Status:** complete (`awesome-dsh-plugin#1449` and `awesome-deepseek-harness#371` open; no merge or force-push performed)
 
 ## Key Questions
 1. 当前可安装 DSH 版本实际提供哪个 UI slot？
@@ -105,6 +105,8 @@ Phase 6
 | R3 closeout 后重复 GitHub commits API 读取遭到本机代理拒绝 | 1 | 保留此前成功的远端 SHA/仓库证据；不重复同一网络请求，资格仍按已记录时间戳失败关闭 |
 | PR 分支并行复核遗漏 `git -C`，导致产品仓无法解析目标仓的 `upstream/main` | 1 | 命令未修改文件；改用显式目标仓路径和 scoped `safe.directory` 后通过 |
 | `awesome-deepseek-harness` 全仓 `awesome-lint` 在 `README.md:345` 报 `vision_analyze` 首字母小写 | 1 | 对照 `upstream/main` 确认为既有基线条目；本 PR 仅新增 251/252 行且 `diff --check` 通过，不修改无关条目 |
+| 两个隔离仓的 `origin` 仍指向 `dsh-session-tree` 的本地参考目录 | 1 | GitHub API 先确认两个 `chouyong` fork 的 parent，再精确改回 HTTPS fork URL；目标分支不存在后普通非强制推送 |
+| `awesome-dsh-plugin` Submission gate 在解析 PR 时耗尽维护方 GitHub App API 配额 | 1 | 真实条目检查尚未执行；尝试只重跑该 run，但 fork 贡献者无管理员权限。保留 run `32039307340` 与日志，等待维护方重跑 |
 
 ## Non-Negotiable Boundaries
 - 不修改 session event，不创建 fork，不恢复 Agent，不改工作区文件，不注入 prompt，不上传会话正文。
